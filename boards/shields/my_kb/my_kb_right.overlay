@@ -41,8 +41,6 @@
         compatible = "zmk,analog-input";
         status = "okay";
         sampling-hz = <100>;
-        /* 起動タイミングを安定させるために追加 */
-        zmk,init-priority = <90>; 
         
         x-ch {
             io-channels = <&adc 5>; 
@@ -91,7 +89,6 @@
         status = "okay";
         device = <&anin0>;
         /* デバイスの後に起動するように設定 */
-        zmk,init-priority = <91>;
         input-processors = <&pointer_accel>;
     };     
 };
