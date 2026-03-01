@@ -3,17 +3,18 @@
 #include <dt-bindings/zmk/bt.h>
 #include <dt-bindings/zmk/mouse.h> 
 
-
-
-
 / {
     keymap {
         compatible = "zmk,keymap";
+
         default_layer {
+            // 7列(左) + 7列(右) = 14列 × 5行 = 全70キー分
             bindings = <
-                &mkp LCLK    &bt BT_CLR    &mkp RCLK
-                &kp A        &kp B         &kp C
-                &kp D        &kp E        &kp F
+                &kp A &kp A &kp A &kp A &kp A &kp A &kp A    &kp A &kp A &kp A &kp A &kp A &kp A &kp A
+                &kp A &kp A &kp A &kp A &kp A &kp A &kp A    &kp A &kp A &kp A &kp A &kp A &kp A &kp A
+                &kp A &kp A &kp A &kp A &kp A &kp A &kp A    &kp A &kp A &kp A &kp A &kp A &kp A &kp A
+                &kp A &kp A &kp A &kp A &kp A &kp A &kp A    &kp A &kp A &kp A &kp A &kp A &kp A &kp A
+                &kp A &kp A &kp A &kp A &kp A &kp A &kp A    &kp A &kp A &kp A &kp A &kp A &kp A &kp A
             >;
         };
     };

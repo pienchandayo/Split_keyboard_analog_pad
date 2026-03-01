@@ -4,11 +4,10 @@
 #include <zephyr/dt-bindings/input/input-event-codes.h>
 #include <dt-bindings/zmk/pointing.h>
 
-// マトリックス定義の衝突回避
-#define MAP(row, col) (row * 3 + col)
-
 #include <input/processors.dtsi>
 #include <behaviors/input_gestures_accel.dtsi>
+
+#include "my_kb.dtsi"
 
 &adc {
     status = "okay";
@@ -20,23 +19,30 @@
         zmk,physical-layout = &layout0;
     };
 
+    &default_transform {
+        col-offset = <7>; // 右手側だけこれが必要
+    };
+
     kscan0: kscan0 {
         compatible = "zmk,kscan-gpio-matrix";
         diode-direction = "col2row";
         wakeup-source;
-        col-gpios = <&pro_micro 4 GPIO_ACTIVE_HIGH>, <&pro_micro 5 GPIO_ACTIVE_HIGH>, <&pro_micro 6 GPIO_ACTIVE_HIGH>;
-        row-gpios = <&pro_micro 7 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>, <&pro_micro 8 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>, <&pro_micro 9 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>;
-    };
-
-    default_transform: keymap_transform0 {
-        compatible = "zmk,matrix-transform";
-        columns = <3>;
-        rows = <3>;
-        map = <
-            MAP(0,0) MAP(0,1) MAP(0,2)
-            MAP(1,0) MAP(1,1) MAP(1,2)
-            MAP(2,0) MAP(2,1) MAP(2,2)
-        >;
+        col-gpios
+        = <&gpio0  (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)> // COL0: P0.17
+        , <&gpio0 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)> // COL1: P0.20
+        , <&gpio0  (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)> // COL2: P0.22
+        , <&gpio0  (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)> // COL3: P0.24
+        , <&gpio1  (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)> // COL4: P1.00 (32番目)
+        , <&gpio0  (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)> // COL5: P0.11
+        , <&gpio1  (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)> // COL6: P1.04 (36番目)
+        ;
+        row-gpios
+        = <&gpio1 15 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)> // ROW0: P1.15
+        , <&gpio1 13 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)> // ROW1: P1.13
+        , <&gpio1 11 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)> // ROW2: P1.11
+        , <&gpio0 10 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)> // ROW3: P0.10
+        , <&gpio0  9 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)> // ROW4: P0.09
+        ;
     };
 
     layout0: layout0 {
