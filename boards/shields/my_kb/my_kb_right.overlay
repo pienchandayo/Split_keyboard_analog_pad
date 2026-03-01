@@ -13,15 +13,17 @@
     status = "okay";
 };
 
+&default_transform {
+    col-offset = <7>; // 右手側だけこれが必要
+};
+
 / {
     chosen {
         zmk,kscan = &kscan0;
         zmk,physical-layout = &layout0;
     };
 
-    &default_transform {
-        col-offset = <7>; // 右手側だけこれが必要
-    };
+
 
     kscan0: kscan0 {
         compatible = "zmk,kscan-gpio-matrix";
