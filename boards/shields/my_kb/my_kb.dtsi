@@ -24,7 +24,7 @@
     // ここで kscan0 を定義する
     kscan0: kscan {
         compatible = "zmk,kscan-gpio-matrix";
-        label = "KSCAN";
+        //label = "KSCAN";
         diode-direction = "col2row";
     };
 };
