@@ -1,8 +1,5 @@
 #include <dt-bindings/zmk/matrix_transform.h>
 
-/* * 左右合計14列(0-13)に合わせて、
- * 2行目の先頭(row=1, col=0)が14番目のインデックスになるよう計算 
- */
 #define MAP(row, col) ((row * 14) + col)
 
 / {
@@ -15,11 +12,6 @@
         compatible = "zmk,matrix-transform";
         columns = <14>;
         rows = <5>;
-
-        /* * 回路図のピン配置に基づいたマッピング
-         * 左手: 物理Index 6(左端) -> 0(中央寄り)
-         * 右手: 物理Index 7(中央寄り) -> 13(右端)
-         */
         map = <
             MAP(0,6) MAP(0,5) MAP(0,4) MAP(0,3) MAP(0,2) MAP(0,1) MAP(0,0)   MAP(0,7) MAP(0,8) MAP(0,9) MAP(0,10) MAP(0,11) MAP(0,12) MAP(0,13)
             MAP(1,6) MAP(1,5) MAP(1,4) MAP(1,3) MAP(1,2) MAP(1,1) MAP(1,0)   MAP(1,7) MAP(1,8) MAP(1,9) MAP(1,10) MAP(1,11) MAP(1,12) MAP(1,13)
@@ -29,6 +21,7 @@
         >;
     };
 
+    // ここで kscan0 を定義する
     kscan0: kscan {
         compatible = "zmk,kscan-gpio-matrix";
         label = "KSCAN";
