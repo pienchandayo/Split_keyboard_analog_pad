@@ -41,8 +41,8 @@
         compatible = "zmk,analog-input";
         status = "okay";
         sampling-hz = <100>;
-        /* zmk,init-priority ではなく zephyr,init-priority を使用 */
-        zephyr,init-priority = <90>; 
+        /* 起動タイミングを安定させるために追加 */
+        zmk,init-priority = <90>; 
         
         x-ch {
             io-channels = <&adc 5>; 
@@ -67,10 +67,16 @@
         };
     };
 
+    zip_xy_transform: zip_xy_transform {
+        compatible = "zmk,input-processor-transform";
+        #input-processor-cells = <1>;
+        type = <INPUT_EV_REL>;
+    };
+
     pointer_accel: pointer_accel {
         compatible = "zmk,input-processor-acceleration";
         #input-processor-cells = <0>;
-        /* エラーが出ていた必須項目 */
+        /* --- ここを修正： 'type' ではなく 'input-type' --- */
         input-type = <INPUT_EV_REL>; 
         min-factor = <800>;
         max-factor = <3000>;
@@ -84,8 +90,8 @@
         compatible = "zmk,input-listener";
         status = "okay";
         device = <&anin0>;
-        /* ここも zephyr,init-priority に修正 */
-        zephyr,init-priority = <91>;
+        /* デバイスの後に起動するように設定 */
+        zmk,init-priority = <91>;
         input-processors = <&pointer_accel>;
     };     
 };
