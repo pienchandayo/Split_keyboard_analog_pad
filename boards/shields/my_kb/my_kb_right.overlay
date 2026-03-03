@@ -1,7 +1,6 @@
 #include "my_kb.dtsi"
 #include <dt-bindings/zmk/pointing.h>
 #include <input/processors.dtsi>
-#include <behaviors/input_gestures_accel.dtsi>
 &default_transform {
     col-offset = <7>; // 右手側だけこれが必要
 };
