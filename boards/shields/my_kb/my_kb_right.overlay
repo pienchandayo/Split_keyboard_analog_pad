@@ -25,13 +25,17 @@
         ;
 };
 &pointer_accel {
-    input-type = <1>;  // For relative input devices
-    track-remainders;             // Accumulate fractional movements
-    min-factor = <800>;          // 0.8x at very slow speeds
-    max-factor = <3000>;         // 3.0x at fast speeds
-    speed-threshold = <1200>;     // 1200 counts/sec for 1x
-    speed-max = <6000>;          // 6000 counts/sec for max accel
-    acceleration-exponent = <2>;  // Quadratic acceleration curve
+    status = "okay";            // 明示的に有効化
+    input-type = <1>;           // INPUT_TYPE_REL
+    
+    /* 設定項目名を標準的なものに合わせます */
+    strategy = <&slope_sw_scaling>; 
+    exponent = <2>;             // acceleration-exponent ではなく exponent
+    scale = <100>;              // 基本スケール
+    
+    /* 以下の拡張プロパティは dtsi の実装によりますが、
+       エラーが出る場合は一旦コメントアウトして試してください */
+    track-remainders;
 };
 / {
     anin0: analog_input_0 {
