@@ -88,12 +88,7 @@
             compatible = "zmk,input-listener";
             status = "okay";
             device = <&anin0>;
-            
-            /* * ここを追加：
-            * アナログ入力デバイスよりも大きな数字（＝遅い優先順位）を指定します。
-            * 通常、ZMKのドライバは 50 前後で動くため、80 程度に設定するのが安全です。
-            */
-            zephyr,init-priority = <80>; 
+
 
             input-processors = <&pointer_accel>;
         };
