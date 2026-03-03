@@ -2,7 +2,6 @@
 
 
 #include <input/processors.dtsi>
-#include <zephyr/dt-bindings/input/input-event-codes.h>
 #include <behaviors/input_gestures_accel.dtsi>
 &default_transform {
     col-offset = <7>; // 右手側だけこれが必要
@@ -26,10 +25,28 @@
         , <&gpio0  9 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
         ;
 };
-
+&pointer_accel {
+    input-type = <INPUT_EV_REL>;  // For relative input devices
+    track-remainders;             // Accumulate fractional movements
+    min-factor = <800>;          // 0.8x at very slow speeds
+    max-factor = <3000>;         // 3.0x at fast speeds
+    speed-threshold = <1200>;     // 1200 counts/sec for 1x
+    speed-max = <6000>;          // 6000 counts/sec for max accel
+    acceleration-exponent = <2>;  // Quadratic acceleration curve
+};
 / {
-    anin0: analog_input_0 {
+    tpad0: tpad0 {
+        compatible = "zmk,input-listener";
+        status = "okay";
+        device = <&glidepoint>;
+        input-processors = <
+            &pointer_accel      // Acceleration processor
+            &zip_xy_transform
+        >;
+    };
+        anin0: analog_input_0 {
         compatible = "zmk,analog-input";
+        status = "okay";
         sampling-hz = <100>;
         
         x-ch {
@@ -53,37 +70,5 @@
             invert;
             input-code = <INPUT_REL_Y>;
         };
-    };
-    zip_xy_transform: zip_xy_transform {
-        compatible = "zmk,input-processor-transform";
-        #input-processor-cells = <1>;
-        type = <INPUT_EV_REL>;
-    };
-
-    pointer_accel: pointer_accel {
-        compatible = "zmk,input-processor-acceleration";
-        #input-processor-cells = <0>;
-        /* --- ここを修正： 'type' ではなく 'input-type' --- */
-        input-type = <INPUT_EV_REL>; 
-        min-factor = <800>;
-        max-factor = <3000>;
-        speed-threshold = <1200>;
-        speed-max = <6000>;
-        acceleration-exponent = <2>;
-        track-remainders;
-    };
-
-    tpad0: tpad0 {
-            compatible = "zmk,input-listener";
-            status = "okay";
-            device = <&anin0>;
-
-
-            input-processors = <&pointer_accel>;
         };
 };
-
-&adc {
-    status = "okay";
-};
-
