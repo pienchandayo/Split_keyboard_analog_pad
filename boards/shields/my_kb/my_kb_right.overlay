@@ -27,9 +27,13 @@
 /* エラーの原因になっているノードを直接修正 */
 &pointer_accel {
     status = "okay";
-    input-type = <1>;      // INPUT_TYPE_REL
-    strategy = <1>;        // 1 = constant-delta-scaling (標準)
-    exponent = <2>;        // 加速の強さ
+    input-type = <1>; // INPUT_TYPE_REL
+    
+    // strategy = <1>; を削除し、代わりに type を使う
+    type = <1>; 
+    
+    // 他の項目もモジュールに合わせて調整
+    exponent = <2>;
     scale = <100>;
 };
 
