@@ -1,17 +1,4 @@
-#include <dt-bindings/zmk/mouse.h>
-#include <dt-bindings/zmk/matrix_transform.h>
-#include <dt-bindings/zmk/keys.h>
-#include <zephyr/dt-bindings/input/input-event-codes.h>
-#include <dt-bindings/zmk/pointing.h>
-
-#include <input/processors.dtsi>
-#include <behaviors/input_gestures_accel.dtsi>
-
 #include "my_kb.dtsi"
-
-&adc {
-    status = "okay";
-};
 
 &default_transform {
     col-offset = <7>; // 右手側だけこれが必要
@@ -36,60 +23,3 @@
         ;
 };
 
-/ {
-    anin0: analog_input_0 {
-        compatible = "zmk,analog-input";
-        status = "okay";
-        sampling-hz = <100>;
-        
-        x-ch {
-            io-channels = <&adc 5>; 
-            mv-mid = <1650>;
-            mv-min-max = <1600>;
-            mv-deadzone = <30>;
-            scale-multiplier = <1>;
-            scale-divisor = <100>;
-            evt-type = <INPUT_EV_REL>;
-            input-code = <INPUT_REL_X>;
-        };
-        y-ch {
-            io-channels = <&adc 0>; 
-            mv-mid = <1650>;
-            mv-min-max = <1600>;
-            mv-deadzone = <30>;
-            scale-multiplier = <1>;
-            scale-divisor = <100>;
-            evt-type = <INPUT_EV_REL>;
-            invert;
-            input-code = <INPUT_REL_Y>;
-        };
-    };
-
-    zip_xy_transform: zip_xy_transform {
-        compatible = "zmk,input-processor-transform";
-        #input-processor-cells = <1>;
-        type = <INPUT_EV_REL>;
-    };
-
-    pointer_accel: pointer_accel {
-        compatible = "zmk,input-processor-acceleration";
-        #input-processor-cells = <0>;
-        /* --- ここを修正： 'type' ではなく 'input-type' --- */
-        input-type = <INPUT_EV_REL>; 
-        min-factor = <800>;
-        max-factor = <3000>;
-        speed-threshold = <1200>;
-        speed-max = <6000>;
-        acceleration-exponent = <2>;
-        track-remainders;
-    };
-
-    tpad0: tpad0 {
-            compatible = "zmk,input-listener";
-            status = "okay";
-            device = <&anin0>;
-
-
-            input-processors = <&pointer_accel>;
-        };
-};
