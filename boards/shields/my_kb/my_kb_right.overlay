@@ -35,7 +35,7 @@
             mv-min-max = <1600>;        // (3) → 25~3225（1625±1600）mVの範囲で動作
             mv-deadzone = <10>;         // (4)
             scale-multiplier = <1>;     // (5)
-            scale-divisor = <100>       // (6)
+            scale-divisor = <100>;       // (6)
             invert;
             evt-type = <INPUT_EV_REL>;
             input-code = <INPUT_REL_X>;
@@ -46,7 +46,7 @@
             mv-min-max = <1600>;        // (3) → 25~3225（1625±1600）mVの範囲で動作
             mv-deadzone = <10>;         // (4)
             scale-multiplier = <1>;     // (5)
-            scale-divisor = <100>       // (6)
+            scale-divisor = <100>;       // (6)
             invert;
             evt-type = <INPUT_EV_REL>;
             input-code = <INPUT_REL_Y>;
