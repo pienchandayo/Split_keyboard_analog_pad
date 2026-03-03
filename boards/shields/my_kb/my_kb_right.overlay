@@ -1,4 +1,8 @@
 #include "my_kb.dtsi"
+
+#include <input/processors.dtsi>
+#include <zephyr/dt-bindings/input/input-event-codes.h>
+#include <behaviors/input_gestures_accel.dtsi>
 &default_transform {
     col-offset = <7>; // 右手側だけこれが必要
 };
@@ -21,3 +25,66 @@
         , <&gpio0  9 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
         ;
 };
+/ {
+    anin0: analog-input-0 {
+        compatible = "zmk,analog-input";
+        sampling-hz = <100>;            // (1)
+        x-ch {
+            io-channels = <&adc 2>;
+            mv-mid = <1625>;            // (2) → デバッグログの出力結果によって微修正する
+            mv-min-max = <1600>;        // (3) → 25~3225（1625±1600）mVの範囲で動作
+            mv-deadzone = <10>;         // (4)
+            scale-multiplier = <1>;     // (5)
+            scale-divisor = <100>       // (6)
+            invert;
+            evt-type = <INPUT_EV_REL>;
+            input-code = <INPUT_REL_X>;
+        };
+        y-ch {
+            io-channels = <&adc 3>;
+            mv-mid = <1625>;            // (2) → デバッグログの出力結果によって微修正する
+            mv-min-max = <1600>;        // (3) → 25~3225（1625±1600）mVの範囲で動作
+            mv-deadzone = <10>;         // (4)
+            scale-multiplier = <1>;     // (5)
+            scale-divisor = <100>       // (6)
+            invert;
+            evt-type = <INPUT_EV_REL>;
+            input-code = <INPUT_REL_Y>;
+        };
+    };
+};
+
+&adc {
+    status = "okay";
+};
+
+// ZMK Pointing Acceleration の設定
+&pointer_accel {
+    input-type = <INPUT_EV_REL>;
+    track-remainders;
+    min-factor = <100>;                 // (7)
+    max-factor = <10000>;               // (8)
+    speed-threshold = <1500>;           // (9)
+    speed-max = <1600>;                 // (10)
+    acceleration-exponent = <2>;        // (11)
+};
+
+//ペリフェラル側のポインティングデバイスとして定義
+/{
+    split_inputs {
+        #address-cells = <1>;
+        #size-cells = <0>;
+        
+        split_peripheral: split_peripheral@0 {
+        compatible = "zmk,input-split";
+        reg = <0>;
+        device = <&anin0>; // アナログ入力ノードを指定
+        status = "okay";
+        input-processors
+            = <&pointer_accel> // ZMK Pointing Acceleration を適用
+            // , <&zip_xy_scaler 1 10> // オプション
+            , <&zip_xy_to_scroll_mapper> // スクロールとして使用
+            ;
+        };
+    };
+}
