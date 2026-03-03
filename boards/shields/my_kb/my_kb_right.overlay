@@ -35,16 +35,7 @@
     acceleration-exponent = <2>;  // Quadratic acceleration curve
 };
 / {
-    tpad0: tpad0 {
-        compatible = "zmk,input-listener";
-        status = "okay";
-        device = <&glidepoint>;
-        input-processors = <
-            &pointer_accel      // Acceleration processor
-            &zip_xy_transform
-        >;
-    };
-        anin0: analog_input_0 {
+    anin0: analog_input_0 {
         compatible = "zmk,analog-input";
         status = "okay";
         sampling-hz = <100>;
@@ -70,5 +61,16 @@
             invert;
             input-code = <INPUT_REL_Y>;
         };
-        };
+    };
+        
+    tpad0: tpad0 {
+        compatible = "zmk,input-listener";
+        status = "okay";
+        device = <&ain0>;
+        input-processors = <
+            &pointer_accel      // Acceleration processor
+            &zip_xy_transform
+        >;
+    };
+
 };
