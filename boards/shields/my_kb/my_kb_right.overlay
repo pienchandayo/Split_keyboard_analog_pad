@@ -24,17 +24,16 @@
         , <&gpio0  9 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
         ;
 };
-/ {
-    /* ここで新しい加速プロセッサを作ります */
-    my_accel: my_accel {
-        compatible = "zmk,input-processor-acceleration";
-        #input-processor-cells = <1>;
-        input-type = <1>;      // INPUT_TYPE_REL
-        strategy = <1>;        // 1 = constant-delta-scaling (標準)
-        exponent = <2>;        // 加速の強さ
-        scale = <100>;
-    };
+/* エラーの原因になっているノードを直接修正 */
+&pointer_accel {
+    status = "okay";
+    input-type = <1>;      // INPUT_TYPE_REL
+    strategy = <1>;        // 1 = constant-delta-scaling (標準)
+    exponent = <2>;        // 加速の強さ
+    scale = <100>;
+};
 
+/ {
     anin0: analog_input_0 {
         compatible = "zmk,analog-input";
         status = "okay";
@@ -67,6 +66,7 @@
         compatible = "zmk,input-listener";
         status = "okay";
         device = <&anin0>;
-        input-processors = <&my_accel 100>; 
+        /* ここで修正した pointer_accel を使う */
+        input-processors = <&pointer_accel 100>; 
     };
 };
