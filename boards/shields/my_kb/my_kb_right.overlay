@@ -1,7 +1,4 @@
 #include "my_kb.dtsi"
-#include <dt-bindings/zmk/pointing.h> 
-#include <input/processors.dtsi>
-#include <behaviors/input_gestures_accel.dtsi>
 &default_transform {
     col-offset = <7>; // 右手側だけこれが必要
 };
@@ -23,54 +20,4 @@
         , <&gpio0 10 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
         , <&gpio0  9 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
         ;
-};
-/* エラーの原因になっているノードを直接修正 */
-&pointer_accel {
-    status = "okay";
-    input-type = <1>; // INPUT_TYPE_REL
-    
-    // strategy = <1>; を削除し、代わりに type を使う
-    type = <1>; 
-    
-    // 他の項目もモジュールに合わせて調整
-    exponent = <2>;
-    scale = <100>;
-};
-
-/ {
-    anin0: analog_input_0 {
-        compatible = "zmk,analog-input";
-        status = "okay";
-        sampling-hz = <100>;
-        
-        x-ch {
-            io-channels = <&adc 5>; 
-            mv-mid = <1650>;
-            mv-min-max = <1600>;
-            mv-deadzone = <30>;
-            scale-multiplier = <1>;
-            scale-divisor = <100>;
-            evt-type = <INPUT_EV_REL>;
-            input-code = <INPUT_REL_X>;
-        };
-        y-ch {
-            io-channels = <&adc 0>; 
-            mv-mid = <1650>;
-            mv-min-max = <1600>;
-            mv-deadzone = <30>;
-            scale-multiplier = <1>;
-            scale-divisor = <100>;
-            evt-type = <INPUT_EV_REL>;
-            invert;
-            input-code = <INPUT_REL_Y>;
-        };
-    };
-        
-    tpad0: tpad0 {
-        compatible = "zmk,input-listener";
-        status = "okay";
-        device = <&anin0>;
-        /* ここで修正した pointer_accel を使う */
-        input-processors = <&pointer_accel 100>; 
-    };
 };
