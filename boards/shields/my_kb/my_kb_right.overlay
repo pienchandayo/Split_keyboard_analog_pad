@@ -52,12 +52,6 @@
 			invert;
 			evt-type = <INPUT_EV_REL>;
 			input-code = <INPUT_REL_Y>;
-
-			/* enable report mdoe for gamepad axix or knob */
-			/* to only call input_report on quantquantized value is updated */
-			/* NOTE: mouse input does NOT need this */
-			report-on-change-only;
-
 		};
 	};
     pointer_accel: pointer_accel {
@@ -72,6 +66,13 @@
         acceleration-exponent = <2>;
         track-remainders;
     };
+
+    zip_xy_transform: zip_xy_transform {
+        compatible = "zmk,input-processor-transform";
+        #input-processor-cells = <1>;
+        type = <INPUT_EV_REL>;
+    };
+
 
     tpad0: tpad0 {
             compatible = "zmk,input-listener";
