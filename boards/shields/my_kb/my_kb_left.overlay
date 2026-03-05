@@ -32,7 +32,7 @@
 			scale-divisor = <70>;
 			invert;
 			evt-type = <INPUT_EV_REL>;
-            input-code = <INPUT_REL_HWHEEL>; //左手はX方向で水平スクロール
+            //input-code = <INPUT_REL_HWHEEL>; //左手はX方向で水平スクロール
 			//input-code = <INPUT_REL_X>;
 		};
 		y-ch {
@@ -44,7 +44,7 @@
 			scale-divisor = <4>;
 			invert;
 			evt-type = <INPUT_EV_REL>;
-            input-code = <INPUT_REL_WHEEL>; //左手はX方向で水平スクロール
+            //input-code = <INPUT_REL_WHEEL>;
 			//input-code = <INPUT_REL_Y>;
 
 			/* enable report mdoe for gamepad axix or knob */
@@ -54,22 +54,23 @@
 
 		};
 	};
-    /* スクロール用の加速度設定 */
-    scroll_accel: scroll_accel {
+    pointer_accel: pointer_accel {
         compatible = "zmk,input-processor-acceleration";
         #input-processor-cells = <0>;
-        input-type = <INPUT_EV_REL>;
-        /* スクロールは移動より敏感すぎることが多いため、factorを調整 */
-        min-factor = <100>;
-        max-factor = <1000>;
-        speed-threshold = <500>;
+        /* --- ここを修正： 'type' ではなく 'input-type' --- */
+        input-type = <INPUT_EV_REL>; 
+        min-factor = <800>;
+        max-factor = <3000>;
+        speed-threshold = <1200>;
+        speed-max = <6000>;
+        acceleration-exponent = <2>;
+        track-remainders;
     };
 
     tpad0: tpad0 {
-        compatible = "zmk,input-listener";
-        status = "okay";
-        device = <&anin0>;
-        /* スクロール専用の加速度プロセッサを適用 */
-        input-processors = <&scroll_accel>;
-    };
+            compatible = "zmk,input-listener";
+            status = "okay";
+            device = <&anin0>;
+            input-processors = <&pointer_accel>;
+        };
 };
