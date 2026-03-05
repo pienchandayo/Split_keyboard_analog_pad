@@ -4,6 +4,7 @@
 #include <dt-bindings/zmk/mouse.h> 
 #include <input/processors.dtsi>
 #include <behaviors/input_gestures_accel.dtsi>
+
 / {
     keymap {
         compatible = "zmk,keymap";
