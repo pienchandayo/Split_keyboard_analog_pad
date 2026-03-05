@@ -1,4 +1,6 @@
 #include "my_kb.dtsi"
+#include <input/processors.dtsi>
+#include <behaviors/input_gestures_accel.dtsi>
 &default_transform {
     col-offset = <7>; // 右手側だけこれが必要
 };
@@ -59,12 +61,6 @@
 
 		};
 	};
-    zip_xy_transform: zip_xy_transform {
-        compatible = "zmk,input-processor-transform";
-        #input-processor-cells = <1>;
-        type = <INPUT_EV_REL>;
-    };
-
     pointer_accel: pointer_accel {
         compatible = "zmk,input-processor-acceleration";
         #input-processor-cells = <0>;
