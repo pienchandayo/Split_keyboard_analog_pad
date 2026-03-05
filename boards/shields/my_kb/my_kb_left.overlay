@@ -20,7 +20,7 @@
         ;
 };
 / {
-	anin0: analog_input_0 {
+	anin1: analog_input_1 {
 		compatible = "zmk,analog-input";
 		sampling-hz = <100>;
 		x-ch {
@@ -68,7 +68,7 @@
     tpad0: tpad0 {
             compatible = "zmk,input-listener";
             status = "okay";
-            device = <&anin0>;
+            device = <&anin1>;
             input-processors = <&pointer_accel>, <&zip_xy_to_scroll_mapper>;
         };
 };
