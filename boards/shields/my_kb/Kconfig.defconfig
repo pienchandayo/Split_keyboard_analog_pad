@@ -1,8 +1,21 @@
+if SHIELD_MY_KB_LEFT
+    config ZMK_KEYBOARD_NAME
+    	default "kb_l"
+    
+    config ZMK_SPLIT_BLE_ROLE_CENTRAL
+    	default y
+endif
+
+if SHIELD_MY_KB_RIGHT
+    config ZMK_KEYBOARD_NAME
+    	default "kb_r"
+    
+    config ZMK_SPLIT_BLE_ROLE_CENTRAL
+    	default y
+endif
+
+
 if SHIELD_MY_KB_LEFT || SHIELD_MY_KB_RIGHT
-
-config ZMK_KEYBOARD_NAME
-    default "My Keyboard"
-
 config ZMK_SPLIT
     default y
 
