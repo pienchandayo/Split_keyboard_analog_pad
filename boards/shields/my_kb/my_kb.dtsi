@@ -26,7 +26,7 @@
     kscan0: kscan {
             compatible = "zmk,kscan-gpio-matrix";
             // 左右それぞれの基板（片手分）のサイズを指定
-            columns = <7>; 
+            columns = <14>; 
             rows = <5>;
             diode-direction = "col2row";
     };
