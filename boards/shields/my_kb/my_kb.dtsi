@@ -23,11 +23,11 @@
             MAP(4,6) MAP(4,5) MAP(4,4) MAP(4,3) MAP(4,2) MAP(4,1) MAP(4,0)   MAP(4,7) MAP(4,8) MAP(4,9) MAP(4,10) MAP(4,11) MAP(4,12) MAP(4,13)
         >;
     };
-
-    // ここで kscan0 を定義する
     kscan0: kscan {
-        compatible = "zmk,kscan-gpio-matrix";
-        //label = "KSCAN";
-        diode-direction = "col2row";
-    };
+            compatible = "zmk,kscan-gpio-matrix";
+            // 左右それぞれの基板（片手分）のサイズを指定
+            columns = <7>; 
+            rows = <5>;
+            diode-direction = "col2row";
+    }
 };
