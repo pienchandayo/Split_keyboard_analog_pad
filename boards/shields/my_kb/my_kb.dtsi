@@ -3,7 +3,7 @@
 #include <dt-bindings/zmk/keys.h>
 
 
-define MAP(row, col) ((row * 14) + col)
+/define MAP(row, col) ((row * 14) + col)
 
 / {
     chosen {
