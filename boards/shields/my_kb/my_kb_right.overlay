@@ -23,9 +23,9 @@
         ;
 };
 
-&adc {
-	status = "okay";
-};
+//&adc {
+//	status = "okay";
+//};
 
 // / {
 // 	anin0: analog_input_0 {
