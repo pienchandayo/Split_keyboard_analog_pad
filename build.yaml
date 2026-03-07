@@ -20,10 +20,10 @@
 ---
 
 include:
-  - board: nice_nano@1.0.0//zmk
+  - board: nice_nano@2.0.0
     shield: my_kb_left
     west-config-path: config/west.yml
-  - board: nice_nano@1.0.0//zmk
+  - board: nice_nano@2.0.0
     shield: my_kb_right
     west-config-path: config/west.yml
   
