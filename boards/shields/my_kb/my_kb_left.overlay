@@ -54,7 +54,7 @@
 	};
     xy_to_scroll: xy_to_scroll {
         compatible = "zmk,input-processor-transform";
-        #input-processor-cells = <0>;
+        #input-processor-cells = <1>;
         type = <INPUT_EV_REL>;
         
         /* x-codes = <変換元 変換先>;
@@ -78,6 +78,6 @@
             compatible = "zmk,input-listener";
             status = "okay";
             device = <&anin1>;
-            input-processors = <&pointer_accel>, <&xy_to_scroll> ;
+            input-processors = <&pointer_accel>, <&xy_to_scroll 0> ;
         };
 };
