@@ -65,6 +65,8 @@
         y-codes = <INPUT_REL_Y INPUT_REL_WHEEL>;
     };
     pointer_accel: pointer_accel {
+        compatible = "zmk,input-processor-acceleration"; // compatibleを明示
+        #input-processor-cells = <1>; // cellsを1に設定
         input-type = <INPUT_EV_REL>;
         min-factor = <700>;        // 0.7x minimum
         max-factor = <4000>;       // 4.0x maximum
@@ -78,6 +80,6 @@
             compatible = "zmk,input-listener";
             status = "okay";
             device = <&anin1>;
-            input-processors = <&pointer_accel>, <&xy_to_scroll 0> ;
+            input-processors = <&xy_to_scroll 0>, <&pointer_accel 0> ;
         };
 };
