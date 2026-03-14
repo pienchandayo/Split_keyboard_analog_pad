@@ -68,6 +68,6 @@
             compatible = "zmk,input-listener";
             status = "okay";
             device = <&anin1>;
-            input-processors = <&xy_to_scroll 0> ;
+            input-processors = <&pointer_accel> ;
         };
 };
