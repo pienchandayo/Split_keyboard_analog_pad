@@ -32,7 +32,7 @@
 			scale-divisor = <100>;
 			//invert;
 			evt-type = <INPUT_EV_REL>;
-			input-code = <INPUT_REL_X>;
+			input-code = <INPUT_REL_HWHEEL>;
 		};
 		y-ch {
 			io-channels = <&adc 0>; // <--- see ain-map.png for nRF52840
@@ -43,7 +43,7 @@
 			scale-divisor = <100>;
 			//invert;
 			evt-type = <INPUT_EV_REL>;
-			input-code = <INPUT_REL_Y>;
+			input-code = <INPUT_REL_WHEEL>;
 
 			/* enable report mdoe for gamepad axix or knob */
 			/* to only call input_report on quantquantized value is updated */
@@ -52,18 +52,6 @@
 
 		};
 	};
-    xy_to_scroll: xy_to_scroll {
-        compatible = "zmk,input-processor-transform";
-        #input-processor-cells = <1>;
-        type = <INPUT_EV_REL>;
-        
-        /* x-codes = <変換元 変換先>;
-           y-codes = <変換元 変換先>;
-           という形式で指定します。
-        */
-        x-codes = <INPUT_REL_X INPUT_REL_HWHEEL>;
-        y-codes = <INPUT_REL_Y INPUT_REL_WHEEL>;
-    };
     pointer_accel: pointer_accel {
         //compatible = "zmk,input-processor-acceleration"; // compatibleを明示
         //#input-processor-cells = <1>; // cellsを1に設定
