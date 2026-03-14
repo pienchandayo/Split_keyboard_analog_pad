@@ -48,7 +48,7 @@
 			/* enable report mdoe for gamepad axix or knob */
 			/* to only call input_report on quantquantized value is updated */
 			/* NOTE: mouse input does NOT need this */
-			report-on-change-only;
+			//report-on-change-only;
 
 		};
 	};

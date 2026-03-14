@@ -6,7 +6,9 @@
 #include <behaviors/input_gestures_accel.dtsi>
 
 #define MAP(row, col) ((row * 14) + col)
-
+&adc {
+    status = "okay";
+};
 / {
     chosen {
         zmk,kscan = &kscan0;
