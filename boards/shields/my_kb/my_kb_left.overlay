@@ -53,11 +53,16 @@
 		};
 	};
     xy_to_scroll: xy_to_scroll {
-    compatible = "zmk,input-processor-transform";
-    #input-processor-cells = <0>;
-    type = <INPUT_EV_REL>;
-    /* Xを水平(HWHEEL)に、Yを垂直(WHEEL)にマッピング */
-    map = <INPUT_REL_X INPUT_REL_HWHEEL>, <INPUT_REL_Y INPUT_REL_WHEEL>;
+        compatible = "zmk,input-processor-transform";
+        #input-processor-cells = <0>;
+        type = <INPUT_EV_REL>;
+        
+        /* x-codes = <変換元 変換先>;
+           y-codes = <変換元 変換先>;
+           という形式で指定します。
+        */
+        x-codes = <INPUT_REL_X INPUT_REL_HWHEEL>;
+        y-codes = <INPUT_REL_Y INPUT_REL_WHEEL>;
     };
     pointer_accel: pointer_accel {
         input-type = <INPUT_EV_REL>;
