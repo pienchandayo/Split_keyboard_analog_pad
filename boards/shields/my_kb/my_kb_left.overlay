@@ -19,42 +19,64 @@
         , <&gpio0  9 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
         ;
 };
-
 / {
-    /* 1. スクロール変換 (引数が必要なタイプ: 1) */
-    xy_to_scroll: xy_to_scroll {
-        compatible = "zmk,input-processor-transform";
-        #input-processor-cells = <1>; 
-        type = <INPUT_EV_REL>;
-        x-codes = <INPUT_REL_X INPUT_REL_HWHEEL>;
-        y-codes = <INPUT_REL_Y INPUT_REL_WHEEL>;
-    };
+    msc: msc {
+            compatible = "zmk,behavior-input-two-axis";
+            #binding-cells = <1>;
+            x-input-code = <INPUT_REL_HWHEEL>;
+            y-input-code = <INPUT_REL_WHEEL>;
+            time-to-max-speed-ms = <300>;
+            acceleration-exponent = <0>;
+        };    
+	anin1: analog_input_1 {
+		compatible = "zmk,analog-input";
+		sampling-hz = <100>;
+		x-ch {
+			io-channels = <&adc 5>; // <--- see ain-map.png for nRF52840
+			mv-mid = <1650>;
+			mv-min-max = <1600>;
+			mv-deadzone = <100>;
+			scale-multiplier = <1>;
+			scale-divisor = <1000>;
+			//invert;
+			evt-type = <INPUT_EV_REL>;
+			input-code = <INPUT_REL_HWHEEL>;
+		};
+		y-ch {
+			io-channels = <&adc 0>; // <--- see ain-map.png for nRF52840
+			mv-mid = <1650>;
+			mv-min-max = <1600>;
+			mv-deadzone = <100>;
+			scale-multiplier = <1>;
+			scale-divisor = <1000>;
+			//invert;
+			evt-type = <INPUT_EV_REL>;
+			input-code = <INPUT_REL_WHEEL>;
 
-    /* 2. 加速プロセッサ (エラーに基づき cells=0, input-type必須) */
+			/* enable report mdoe for gamepad axix or knob */
+			/* to only call input_report on quantquantized value is updated */
+			/* NOTE: mouse input does NOT need this */
+			//report-on-change-only;
+
+		};
+        
+	};
     pointer_accel: pointer_accel {
-        compatible = "zmk,input-processor-acceleration";
-        #input-processor-cells = <0>; // ここを 0 に戻す
-        
-        input-type = <INPUT_EV_REL>; // これは必須
-
-        min-factor = <700>;
-        max-factor = <4000>;
-        speed-threshold = <1000>;
-        speed-max = <6000>;
-        acceleration-exponent = <3>;
-        track-remainders;
+        //compatible = "zmk,input-processor-acceleration"; // compatibleを明示
+        //#input-processor-cells = <1>; // cellsを1に設定
+        input-type = <INPUT_EV_REL>;
+        min-factor = <700>;        // 0.7x minimum
+        max-factor = <4000>;       // 4.0x maximum
+        speed-threshold = <1000>;  // Start accelerating earlier
+        speed-max = <6000>;          // 6000 counts/sec for max accel
+        acceleration-exponent = <3>; // Cubic acceleration curve
+        track-remainders;          // Track fractional movements
     };
 
-    /* 3. リスナー：anin1の外側に配置 */
-    tpad0: tpad0 {
-        compatible = "zmk,input-listener";
-        status = "okay";
-        device = <&anin1>;
-        
-        /* 呼び出し時の引数の有無に注意！
-           pointer_accel は cells=0 なので引数なし。
-           xy_to_scroll は cells=1 なので 0 を添える。
-        */
-        input-processors = <&pointer_accel>, <&xy_to_scroll 0>;
-    };
+    tpad1: tpad1 {
+            compatible = "zmk,behavior-input-two-axis";
+            status = "okay";
+            device = <&anin1>;
+            input-processors = <&pointer_accel> ;
+        };
 };
