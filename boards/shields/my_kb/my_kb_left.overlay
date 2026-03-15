@@ -21,7 +21,7 @@
 };
 
 / {
-    /* スクロールの基本挙動定義 */
+    /* スクロール基本設定 */
     msc: msc {
         compatible = "zmk,behavior-input-two-axis";
         #binding-cells = <1>;
@@ -40,9 +40,9 @@
             mv-min-max = <1600>;
             mv-deadzone = <100>;
             scale-multiplier = <1>;
-            scale-divisor = <100>; 
+            scale-divisor = <100>;
             evt-type = <INPUT_EV_REL>;
-            input-code = <INPUT_REL_X>; // 一旦REL_Xとして出し、後で変換する方が確実です
+            input-code = <INPUT_REL_X>; // REL_Xとして出力
         };
         y-ch {
             io-channels = <&adc 0>;
@@ -52,11 +52,11 @@
             scale-multiplier = <1>;
             scale-divisor = <100>;
             evt-type = <INPUT_EV_REL>;
-            input-code = <INPUT_REL_Y>; // 一旦REL_Yとして出し、後で変換する方が確実です
+            input-code = <INPUT_REL_Y>; // REL_Yとして出力
         };
     };
 
-    /* REL_X/Y を スクロールに変換するプロセッサ */
+    /* 移動(REL_X/Y)をスクロール(WHEEL)に変換 */
     xy_to_scroll: xy_to_scroll {
         compatible = "zmk,input-processor-transform";
         #input-processor-cells = <1>;
@@ -65,21 +65,28 @@
         y-codes = <INPUT_REL_Y INPUT_REL_WHEEL>;
     };
 
-    /* スクロール速度の調整 */
-    scroll_scaler: scroll_scaler {
-        compatible = "zmk,input-processor-scaler";
-        #input-processor-cells = <1>;
-        type = <INPUT_EV_REL>;
-        multiplier = <1>;
-        divisor = <10>; 
+    /* 加速プロセッサ (エラー修正済み) */
+    pointer_accel: pointer_accel {
+        compatible = "zmk,input-processor-acceleration";
+        #input-processor-cells = <1>; // yamlの指定に合わせて確認が必要ですが、通常は1が多いです
+        
+        /* 必須項目の追加 */
+        input-type = <INPUT_EV_REL>; 
+        
+        min-factor = <700>;
+        max-factor = <4000>;
+        speed-threshold = <1000>;
+        speed-max = <6000>;
+        acceleration-exponent = <3>;
+        track-remainders;
     };
 
-    /* リスナー：anin1 の外側に定義する必要があります */
+    /* リスナー：anin1の外に置く */
     tpad0: tpad0 {
         compatible = "zmk,input-listener";
         status = "okay";
         device = <&anin1>;
-        /* スケーラーで値を調整し、トランスフォーマーでスクロールに変換する */
-        input-processors = <&scroll_scaler 0>, <&xy_to_scroll 0>;
+        /* 処理順序：加速させてからスクロールに変換 */
+        input-processors = <&pointer_accel 0>, <&xy_to_scroll 0>;
     };
 };
