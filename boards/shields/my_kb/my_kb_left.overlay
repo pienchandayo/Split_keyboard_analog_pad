@@ -49,8 +49,8 @@
 			scale-multiplier = <1>;
 			scale-divisor = <50>;
 			invert;
-			evt-type = <INPUT_REL_WHEEL>;
-			input-code = <>;
+			evt-type = <INPUT_EV_REL>;
+			input-code = <INPUT_REL_WHEEL>;
 		};
 	};
 
