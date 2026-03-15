@@ -19,59 +19,67 @@
         , <&gpio0  9 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
         ;
 };
+
 / {
+    /* スクロールの基本挙動定義 */
     msc: msc {
-            compatible = "zmk,behavior-input-two-axis";
-            #binding-cells = <1>;
-            x-input-code = <INPUT_REL_HWHEEL>;
-            y-input-code = <INPUT_REL_WHEEL>;
-            time-to-max-speed-ms = <300>;
-            acceleration-exponent = <0>;
-        };    
-	anin1: analog_input_1 {
-		compatible = "zmk,analog-input";
-		sampling-hz = <100>;
-		x-ch {
-			io-channels = <&adc 5>; // <--- see ain-map.png for nRF52840
-			mv-mid = <1650>;
-			mv-min-max = <1600>;
-			mv-deadzone = <100>;
-			scale-multiplier = <1>;
-			scale-divisor = <1000>;
-			//invert;
-			evt-type = <INPUT_EV_REL>;
-			input-code = <INPUT_REL_HWHEEL>;
-		};
-		y-ch {
-			io-channels = <&adc 0>; // <--- see ain-map.png for nRF52840
-			mv-mid = <1650>;
-			mv-min-max = <1600>;
-			mv-deadzone = <100>;
-			scale-multiplier = <1>;
-			scale-divisor = <1000>;
-			//invert;
-			evt-type = <INPUT_EV_REL>;
-			input-code = <INPUT_REL_WHEEL>;
+        compatible = "zmk,behavior-input-two-axis";
+        #binding-cells = <1>;
+        x-input-code = <INPUT_REL_HWHEEL>;
+        y-input-code = <INPUT_REL_WHEEL>;
+        time-to-max-speed-ms = <300>;
+        acceleration-exponent = <0>;
+    };
 
-			/* enable report mdoe for gamepad axix or knob */
-			/* to only call input_report on quantquantized value is updated */
-			/* NOTE: mouse input does NOT need this */
-			//report-on-change-only;
+    anin1: analog_input_1 {
+        compatible = "zmk,analog-input";
+        sampling-hz = <100>;
+        x-ch {
+            io-channels = <&adc 5>;
+            mv-mid = <1650>;
+            mv-min-max = <1600>;
+            mv-deadzone = <100>;
+            scale-multiplier = <1>;
+            scale-divisor = <100>; 
+            evt-type = <INPUT_EV_REL>;
+            input-code = <INPUT_REL_X>; // 一旦REL_Xとして出し、後で変換する方が確実です
+        };
+        y-ch {
+            io-channels = <&adc 0>;
+            mv-mid = <1650>;
+            mv-min-max = <1600>;
+            mv-deadzone = <100>;
+            scale-multiplier = <1>;
+            scale-divisor = <100>;
+            evt-type = <INPUT_EV_REL>;
+            input-code = <INPUT_REL_Y>; // 一旦REL_Yとして出し、後で変換する方が確実です
+        };
+    };
 
-		};
-        scroll_scaler: scroll_scaler {
+    /* REL_X/Y を スクロールに変換するプロセッサ */
+    xy_to_scroll: xy_to_scroll {
+        compatible = "zmk,input-processor-transform";
+        #input-processor-cells = <1>;
+        type = <INPUT_EV_REL>;
+        x-codes = <INPUT_REL_X INPUT_REL_HWHEEL>;
+        y-codes = <INPUT_REL_Y INPUT_REL_WHEEL>;
+    };
+
+    /* スクロール速度の調整 */
+    scroll_scaler: scroll_scaler {
         compatible = "zmk,input-processor-scaler";
         #input-processor-cells = <1>;
         type = <INPUT_EV_REL>;
         multiplier = <1>;
         divisor = <10>; 
-        };
+    };
 
-        tpad0: tpad0 {
-            compatible = "zmk,input-listener";
-            status = "okay";
-            device = <&anin1>;
-            input-processors = <&scroll_scaler 0>;
-        };
-	};
+    /* リスナー：anin1 の外側に定義する必要があります */
+    tpad0: tpad0 {
+        compatible = "zmk,input-listener";
+        status = "okay";
+        device = <&anin1>;
+        /* スケーラーで値を調整し、トランスフォーマーでスクロールに変換する */
+        input-processors = <&scroll_scaler 0>, <&xy_to_scroll 0>;
+    };
 };
