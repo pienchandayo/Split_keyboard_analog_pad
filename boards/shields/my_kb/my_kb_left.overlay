@@ -59,7 +59,7 @@
         #input-processor-cells = <0>;
         /* --- ここを修正： 'type' ではなく 'input-type' --- */
         input-type = <INPUT_EV_REL>; 
-        min-factor = <40>;
+        min-factor = <10>;
         max-factor = <10000>;
         speed-threshold = <1500>;
         speed-max = <1600>;
