@@ -27,7 +27,7 @@
 / {
 	anin1: analog_input_1 {
 		//compatible = "zmk,analog-input";
-        compatible = "zmk,behavior-input-two-axis"
+        compatible = "zmk,behavior-input-two-axis";
 		sampling-hz = <100>;
 		x-ch {
 			io-channels = <&adc 5>; // <--- see ain-map.png for nRF52840
