@@ -20,14 +20,6 @@
         ;
 };
 / {
-    msc: msc {
-            compatible = "zmk,behavior-input-two-axis";
-            #binding-cells = <1>;
-            x-input-code = <INPUT_REL_HWHEEL>;
-            y-input-code = <INPUT_REL_WHEEL>;
-            time-to-max-speed-ms = <300>;
-            acceleration-exponent = <0>;
-        };    
 	anin1: analog_input_1 {
 		compatible = "zmk,analog-input";
 		sampling-hz = <100>;
@@ -59,7 +51,6 @@
 			//report-on-change-only;
 
 		};
-        
 	};
     pointer_accel: pointer_accel {
         //compatible = "zmk,input-processor-acceleration"; // compatibleを明示
