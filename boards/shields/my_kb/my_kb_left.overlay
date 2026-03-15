@@ -26,7 +26,8 @@
 
 / {
 	anin1: analog_input_1 {
-		compatible = "zmk,analog-input";
+		//compatible = "zmk,analog-input";
+        compatible = "zmk,behavior-input-two-axis"
 		sampling-hz = <100>;
 		x-ch {
 			io-channels = <&adc 5>; // <--- see ain-map.png for nRF52840
@@ -37,7 +38,7 @@
 			scale-divisor = <50>;
 			invert;
 			evt-type = <INPUT_EV_REL>;
-			input-code = <INPUT_REL_X>;
+			x-input-code = <INPUT_REL_X>;
 		};
 		y-ch {
 			io-channels = <&adc 0>; // <--- see ain-map.png for nRF52840
@@ -48,27 +49,27 @@
 			scale-divisor = <50>;
 			invert;
 			evt-type = <INPUT_EV_REL>;
-			input-code = <INPUT_REL_Y>;
+			y-input-code = <INPUT_REL_Y>;
 		};
 	};
 
-    pointer_accel: pointer_accel {
-        compatible = "zmk,input-processor-acceleration";
-        #input-processor-cells = <0>;
-        /* --- ここを修正： 'type' ではなく 'input-type' --- */
-        input-type = <INPUT_EV_REL>; 
-        min-factor = <800>;
-        max-factor = <3000>;
-        speed-threshold = <1200>;
-        speed-max = <6000>;
-        acceleration-exponent = <2>;
-        track-remainders;
-    };
+//     pointer_accel: pointer_accel {
+//         compatible = "zmk,input-processor-acceleration";
+//         #input-processor-cells = <0>;
+//         /* --- ここを修正： 'type' ではなく 'input-type' --- */
+//         input-type = <INPUT_EV_REL>; 
+//         min-factor = <800>;
+//         max-factor = <3000>;
+//         speed-threshold = <1200>;
+//         speed-max = <6000>;
+//         acceleration-exponent = <2>;
+//         track-remainders;
+//     };
 
-    tpad1: tpad1 {
-            compatible = "zmk,input-listener";
-            status = "okay";
-            device = <&anin1>;
-            input-processors = <&pointer_accel>;
-        };
-};
+//     tpad1: tpad1 {
+//             compatible = "zmk,input-listener";
+//             status = "okay";
+//             device = <&anin1>;
+//             input-processors = <&pointer_accel>, <&zip_xy_to_scroll_mapper>;
+//         };
+// };
