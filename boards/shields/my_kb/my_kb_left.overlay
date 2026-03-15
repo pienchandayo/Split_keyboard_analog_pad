@@ -71,6 +71,6 @@
             compatible = "zmk,input-listener";
             status = "okay";
             device = <&anin1>;
-            input-processors = <&pointer_accel>, <&zip_xy_scaler 1 10>;
+            input-processors = <&pointer_accel>, <&zip_xy_scaler 1 100>;
         };
  };
