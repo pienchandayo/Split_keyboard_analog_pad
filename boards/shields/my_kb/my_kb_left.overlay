@@ -20,6 +20,14 @@
         ;
 };
 / {
+    msc: msc {
+            compatible = "zmk,behavior-input-two-axis";
+            #binding-cells = <1>;
+            x-input-code = <INPUT_REL_HWHEEL>;
+            y-input-code = <INPUT_REL_WHEEL>;
+            time-to-max-speed-ms = <300>;
+            acceleration-exponent = <0>;
+        };    
 	anin1: analog_input_1 {
 		compatible = "zmk,analog-input";
 		sampling-hz = <100>;
@@ -32,7 +40,7 @@
 			scale-divisor = <1000>;
 			//invert;
 			evt-type = <INPUT_EV_REL>;
-			x-input-code = <INPUT_REL_HWHEEL>;
+			input-code = <INPUT_REL_HWHEEL>;
 		};
 		y-ch {
 			io-channels = <&adc 0>; // <--- see ain-map.png for nRF52840
@@ -43,7 +51,7 @@
 			scale-divisor = <1000>;
 			//invert;
 			evt-type = <INPUT_EV_REL>;
-			y-input-code = <INPUT_REL_WHEEL>;
+			input-code = <INPUT_REL_WHEEL>;
 
 			/* enable report mdoe for gamepad axix or knob */
 			/* to only call input_report on quantquantized value is updated */
@@ -51,23 +59,19 @@
 			//report-on-change-only;
 
 		};
-	};
-    pointer_accel: pointer_accel {
-        //compatible = "zmk,input-processor-acceleration"; // compatibleを明示
-        //#input-processor-cells = <1>; // cellsを1に設定
-        input-type = <INPUT_EV_REL>;
-        min-factor = <700>;        // 0.7x minimum
-        max-factor = <4000>;       // 4.0x maximum
-        speed-threshold = <1000>;  // Start accelerating earlier
-        speed-max = <6000>;          // 6000 counts/sec for max accel
-        acceleration-exponent = <3>; // Cubic acceleration curve
-        track-remainders;          // Track fractional movements
-    };
+        scroll_scaler: scroll_scaler {
+        compatible = "zmk,input-processor-scaler";
+        #input-processor-cells = <1>;
+        type = <INPUT_EV_REL>;
+        multiplier = <1>;
+        divisor = <10>; 
+        };
 
-    tpad1: tpad1 {
-            compatible = "zmk,behavior-input-two-axis";
+        tpad0: tpad0 {
+            compatible = "zmk,input-listener";
             status = "okay";
             device = <&anin1>;
-            input-processors = <&pointer_accel> ;
+            input-processors = <&scroll_scaler 0>;
         };
+	};
 };
