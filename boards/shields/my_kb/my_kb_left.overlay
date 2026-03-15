@@ -1,5 +1,5 @@
 #include "my_kb.dtsi"
-//#include <behaviors/input_gestures_accel.dtsi>
+#include <behaviors/input_gestures_accel.dtsi>
 #include <zephyr/dt-bindings/input/input-event-codes.h>
 &kscan0 {
     col-gpios
@@ -27,8 +27,8 @@
 
 / {
 	anin1: analog_input_1 {
-		//compatible = "zmk,analog-input";
-        compatible = "zmk,behavior-input-two-axis";
+		compatible = "zmk,analog-input";
+        //compatible = "zmk,behavior-input-two-axis";
 		sampling-hz = <100>;
 		x-ch {
 			io-channels = <&adc 5>; // <--- see ain-map.png for nRF52840
@@ -39,7 +39,7 @@
 			scale-divisor = <50>;
 			invert;
 			evt-type = <INPUT_EV_REL>;
-			x-input-code = <INPUT_REL_X>;
+			x-input-code = <INPUT_REL_HWHEEL>;
 		};
 		y-ch {
 			io-channels = <&adc 0>; // <--- see ain-map.png for nRF52840
@@ -49,28 +49,28 @@
 			scale-multiplier = <1>;
 			scale-divisor = <50>;
 			invert;
-			evt-type = <INPUT_EV_REL>;
-			y-input-code = <INPUT_REL_Y>;
+			evt-type = <INPUT_REL_WHEEL>;
+			y-input-code = <>;
 		};
 	};
 
-//     pointer_accel: pointer_accel {
-//         compatible = "zmk,input-processor-acceleration";
-//         #input-processor-cells = <0>;
-//         /* --- ここを修正： 'type' ではなく 'input-type' --- */
-//         input-type = <INPUT_EV_REL>; 
-//         min-factor = <800>;
-//         max-factor = <3000>;
-//         speed-threshold = <1200>;
-//         speed-max = <6000>;
-//         acceleration-exponent = <2>;
-//         track-remainders;
-//     };
+    pointer_accel: pointer_accel {
+        compatible = "zmk,input-processor-acceleration";
+        #input-processor-cells = <0>;
+        /* --- ここを修正： 'type' ではなく 'input-type' --- */
+        input-type = <INPUT_EV_REL>; 
+        min-factor = <800>;
+        max-factor = <3000>;
+        speed-threshold = <1200>;
+        speed-max = <6000>;
+        acceleration-exponent = <2>;
+        track-remainders;
+    };
 
-//     tpad1: tpad1 {
-//             compatible = "zmk,input-listener";
-//             status = "okay";
-//             device = <&anin1>;
-//             input-processors = <&pointer_accel>, <&zip_xy_to_scroll_mapper>;
-//         };
+    tpad1: tpad1 {
+            compatible = "zmk,input-listener";
+            status = "okay";
+            device = <&anin1>;
+            input-processors = <&pointer_accel>, <&zip_xy_to_scroll_mapper>;
+        };
  };
