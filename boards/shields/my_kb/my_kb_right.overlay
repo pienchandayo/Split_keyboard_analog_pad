@@ -1,5 +1,5 @@
 #include "my_kb.dtsi"
-
+#include <dt-bindings/zmk/pointing.h>
 &default_transform {
     col-offset = <7>; // 右手側だけこれが必要
 };
