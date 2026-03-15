@@ -65,7 +65,7 @@
     // };
 
     tpad1: tpad1 {
-            compatible = "zmk,behavior-input-two-axis"
+            compatible = "zmk,behavior-input-two-axis";
             status = "okay";
             device = <&anin1>;
             //input-processors = <&pointer_accel> ;
