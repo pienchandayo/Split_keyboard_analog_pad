@@ -72,4 +72,4 @@
 //             device = <&anin1>;
 //             input-processors = <&pointer_accel>, <&zip_xy_to_scroll_mapper>;
 //         };
-// };
+ };
