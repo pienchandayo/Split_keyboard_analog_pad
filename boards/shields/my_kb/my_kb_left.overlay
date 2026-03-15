@@ -1,5 +1,6 @@
 #include "my_kb.dtsi"
 //#include <behaviors/input_gestures_accel.dtsi>
+#include <zephyr/dt-bindings/input/input-event-codes.h>
 &kscan0 {
     col-gpios
         = <&gpio1  4 GPIO_ACTIVE_HIGH>
