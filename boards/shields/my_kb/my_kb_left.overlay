@@ -64,7 +64,7 @@
         track-remainders;          // Track fractional movements
     };
 
-    tpad0: tpad0 {
+    tpad1: tpad1 {
             compatible = "zmk,input-listener";
             status = "okay";
             device = <&anin1>;
