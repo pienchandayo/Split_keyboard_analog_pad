@@ -19,12 +19,6 @@
         , <&gpio0  9 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
         ;
 };
-&msc {
-    x-input-code = <INPUT_REL_HWHEEL>;
-    y-input-code = <INPUT_REL_WHEEL>;
-    time-to-max-speed-ms = <300>;
-    acceleration-exponent = <1>; // 0なら定速、1以上にすると加速します
-};
 / {
 	anin1: analog_input_1 {
 		compatible = "zmk,analog-input";
@@ -71,7 +65,7 @@
     // };
 
     tpad1: tpad1 {
-            compatible = "zmk,input-listener";
+            compatible = "zmk,behavior-input-two-axis"
             status = "okay";
             device = <&anin1>;
             //input-processors = <&pointer_accel> ;
