@@ -59,7 +59,7 @@
         #input-processor-cells = <0>;
         /* --- ここを修正： 'type' ではなく 'input-type' --- */
         input-type = <INPUT_EV_REL>; 
-        min-factor = <100>;
+        min-factor = <10>;
         max-factor = <2000>;
         speed-threshold = <1000>;
         speed-max = <6000>;
@@ -71,6 +71,6 @@
             compatible = "zmk,input-listener";
             status = "okay";
             device = <&anin1>;
-            input-processors = <&pointer_accel>, <&zip_xy_scaler 1 100>;
+            input-processors = <&pointer_accel>;
         };
  };
