@@ -21,58 +21,22 @@
 };
 
 / {
-    /* スクロール基本設定 */
-    msc: msc {
-        compatible = "zmk,behavior-input-two-axis";
-        #binding-cells = <1>;
-        x-input-code = <INPUT_REL_HWHEEL>;
-        y-input-code = <INPUT_REL_WHEEL>;
-        time-to-max-speed-ms = <300>;
-        acceleration-exponent = <0>;
-    };
-
-    anin1: analog_input_1 {
-        compatible = "zmk,analog-input";
-        sampling-hz = <100>;
-        x-ch {
-            io-channels = <&adc 5>;
-            mv-mid = <1650>;
-            mv-min-max = <1600>;
-            mv-deadzone = <100>;
-            scale-multiplier = <1>;
-            scale-divisor = <100>;
-            evt-type = <INPUT_EV_REL>;
-            input-code = <INPUT_REL_X>; // REL_Xとして出力
-        };
-        y-ch {
-            io-channels = <&adc 0>;
-            mv-mid = <1650>;
-            mv-min-max = <1600>;
-            mv-deadzone = <100>;
-            scale-multiplier = <1>;
-            scale-divisor = <100>;
-            evt-type = <INPUT_EV_REL>;
-            input-code = <INPUT_REL_Y>; // REL_Yとして出力
-        };
-    };
-
-    /* 移動(REL_X/Y)をスクロール(WHEEL)に変換 */
+    /* 1. スクロール変換 (引数が必要なタイプ: 1) */
     xy_to_scroll: xy_to_scroll {
         compatible = "zmk,input-processor-transform";
-        #input-processor-cells = <1>;
+        #input-processor-cells = <1>; 
         type = <INPUT_EV_REL>;
         x-codes = <INPUT_REL_X INPUT_REL_HWHEEL>;
         y-codes = <INPUT_REL_Y INPUT_REL_WHEEL>;
     };
 
-    /* 加速プロセッサ (エラー修正済み) */
+    /* 2. 加速プロセッサ (エラーに基づき cells=0, input-type必須) */
     pointer_accel: pointer_accel {
         compatible = "zmk,input-processor-acceleration";
-        #input-processor-cells = <1>; // yamlの指定に合わせて確認が必要ですが、通常は1が多いです
+        #input-processor-cells = <0>; // ここを 0 に戻す
         
-        /* 必須項目の追加 */
-        input-type = <INPUT_EV_REL>; 
-        
+        input-type = <INPUT_EV_REL>; // これは必須
+
         min-factor = <700>;
         max-factor = <4000>;
         speed-threshold = <1000>;
@@ -81,12 +45,16 @@
         track-remainders;
     };
 
-    /* リスナー：anin1の外に置く */
+    /* 3. リスナー：anin1の外側に配置 */
     tpad0: tpad0 {
         compatible = "zmk,input-listener";
         status = "okay";
         device = <&anin1>;
-        /* 処理順序：加速させてからスクロールに変換 */
-        input-processors = <&pointer_accel 0>, <&xy_to_scroll 0>;
+        
+        /* 呼び出し時の引数の有無に注意！
+           pointer_accel は cells=0 なので引数なし。
+           xy_to_scroll は cells=1 なので 0 を添える。
+        */
+        input-processors = <&pointer_accel>, <&xy_to_scroll 0>;
     };
 };
