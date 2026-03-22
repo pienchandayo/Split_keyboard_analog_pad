@@ -1,0 +1,9 @@
+﻿Designator,Footprint,Quantity,Value,LCSC Part #
+"D_L_0_0, D_L_0_1, D_L_0_10, D_L_0_11, D_L_0_12, D_L_0_13, D_L_0_2, D_L_0_3, D_L_0_4, D_L_0_5, D_L_0_8, D_L_0_9, D_L_1_0, D_L_1_1, D_L_1_10, D_L_1_11, D_L_1_12, D_L_1_13, D_L_1_2, D_L_1_3, D_L_1_4, D_L_1_5, D_L_1_8, D_L_1_9, D_L_2_0, D_L_2_1, D_L_2_10, D_L_2_11, D_L_2_12, D_L_2_13, D_L_2_2, D_L_2_3, D_L_2_4, D_L_2_5, D_L_2_6, D_L_2_7, D_L_2_8, D_L_2_9, D_L_3_0, D_L_3_1, D_L_3_10, D_L_3_11, D_L_3_12, D_L_3_13, D_L_3_2, D_L_3_3, D_L_3_4, D_L_3_5, D_L_3_6, D_L_3_7, D_L_3_8, D_L_3_9, D_L_4_0, D_L_4_1, D_L_4_10, D_L_4_12, D_L_4_13, D_L_4_2, D_L_4_3, D_L_4_4, D_L_4_5, D_L_4_7_SUB1, D_L_4_8_SUB1, D_L_4_9",D_SOD-123,64,1N4148W,
+"J1, J2",Switch_joy_pad,2,Conn_01x05_Pin,
+"J3, J4",PinHeader_1x08_P2.54mm_Vertical,2,Conn_01x08_Pin,
+"SW_L_0_0, SW_L_0_1, SW_L_0_10, SW_L_0_11, SW_L_0_12, SW_L_0_13, SW_L_0_2, SW_L_0_3, SW_L_0_4, SW_L_0_5, SW_L_0_8, SW_L_0_9, SW_L_1_0, SW_L_1_1, SW_L_1_10, SW_L_1_11, SW_L_1_12, SW_L_1_13, SW_L_1_2, SW_L_1_3, SW_L_1_4, SW_L_1_5, SW_L_1_8, SW_L_1_9, SW_L_2_0, SW_L_2_1, SW_L_2_10, SW_L_2_11, SW_L_2_12, SW_L_2_13, SW_L_2_2, SW_L_2_3, SW_L_2_4, SW_L_2_5, SW_L_2_6, SW_L_2_7, SW_L_2_8, SW_L_2_9, SW_L_3_0, SW_L_3_1, SW_L_3_10, SW_L_3_11, SW_L_3_12, SW_L_3_13, SW_L_3_2, SW_L_3_3, SW_L_3_4, SW_L_3_5, SW_L_3_6, SW_L_3_7, SW_L_3_8, SW_L_3_9, SW_L_4_0, SW_L_4_1, SW_L_4_10, SW_L_4_12, SW_L_4_13, SW_L_4_3",SW_Hotswap_Kailh_MX_1.00u,58,SW_Push,
+"SW_L_4_4, SW_L_4_9",SW_Hotswap_Kailh_MX_2.00u,2,SW_Push,
+"SW_L_4_5_SUB1, SW_L_4_6_SUB1, SW_L_4_7_SUB1, SW_L_4_8_SUB1",SW_Kailh_Choc_V2_1.00u,4,SW_Push,
+"SW_RST_L1, SW_RST_R1",SW_SPST_Omron_B3FS-100xP,2,SW_Push,
+"U1, U2",nice_nano,2,nice_nano,
