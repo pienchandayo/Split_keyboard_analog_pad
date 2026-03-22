@@ -6,6 +6,7 @@
 &adc {
 	status = "okay";
 };
+
 &kscan0 {
     /* CL0 から CL6 までの 7本 */
     col-gpios
@@ -27,6 +28,13 @@
         , <&gpio0 22 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)> /* RL4: P0.22 (Pin 7) */
         ;
 };
+
+&kscan_direct {
+    //analog padのボタンの割り当て
+    input-gpios
+        = <&gpio0 31 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
+};
+
 / {
 	anin1: analog_input_1 {
 		compatible = "zmk,analog-input";

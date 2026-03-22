@@ -29,7 +29,11 @@
 &adc {
 	status = "okay";
 };
-
+&kscan_direct {
+    //analog padのボタンの割り当て
+    input-gpios
+        = <&gpio0 31 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
+};
 / {
 	anin0: analog_input_0 {
 		compatible = "zmk,analog-input";
@@ -77,4 +81,9 @@
             device = <&anin0>;
             input-processors = <&pointer_accel>;
         };
+    kscan_direct: kscan_direct {
+    compatible = "zmk,kscan-gpio-direct";
+    input-gpios
+        = <&gpio0 31 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>; // P0.31を使用する場合
+    };
 };
