@@ -8,13 +8,23 @@
         compatible = "zmk,keymap";
 
         default_layer {
+            // 7列(左) + 7列(右) = 14列 × 5行 = 全70キー分, 左アナログパッド,右アナログパッド
+            bindings = <
+                &kp A &kp A &kp A &kp A &kp A &kp A &none    &none &kp A &kp A &kp A &kp A &kp A &kp A  &mkp LCLK   &mkp MCLK
+                &kp A &kp A &kp A &kp A &kp A &kp A &none    &none &kp A &kp A &kp A &kp A &kp A &kp A  &none       &none    
+                &kp A &kp A &kp A &kp A &kp A &kp A &kp A    &kp A &kp A &kp A &kp A &kp A &kp A &kp A  &none       &none
+                &kp A &kp A &kp A &kp A &kp A &kp A &kp A    &kp A &kp A &kp A &kp A &kp A &kp A &kp A  &none       &none
+                &kp A &kp A &none &kp A &kp A &kp A &kp A    &kp A &kp A &kp A &kp A &none &kp A &kp A  &none       &none
+            >;
+        };
+        layer_1 {
             // 7列(左) + 7列(右) = 14列 × 5行 = 全70キー分
             bindings = <
-                &kp A &kp A &kp A &kp A &kp A &kp A &kp A    &kp A &kp A &kp A &kp A &kp A &kp A &kp A
-                &kp A &kp A &kp A &kp A &kp A &kp A &kp A    &kp A &kp A &kp A &kp A &kp A &kp A &kp A
-                &kp A &kp A &kp A &kp A &kp A &kp A &kp A    &kp A &kp A &kp A &kp A &kp A &kp A &kp A
-                &kp A &kp A &kp A &kp A &kp A &kp A &kp A    &kp A &kp A &kp A &kp A &kp A &kp A &kp A
-                &kp A &kp A &kp A &kp A &kp A &kp A &kp A    &kp A &kp A &kp A &kp A &kp A &kp A &kp A
+                &kp A &kp A &kp A &kp A &kp A &kp A &none    &none &kp A &kp A &kp A &kp A &kp A &kp A  &mkp LCLK   &mkp MCLK
+                &kp A &kp A &kp A &kp A &kp A &kp A &none    &none &kp A &kp A &kp A &kp A &kp A &kp A  &none       &none    
+                &kp A &kp A &kp A &kp A &kp A &kp A &kp A    &kp A &kp A &kp A &kp A &kp A &kp A &kp A  &none       &none
+                &kp A &kp A &kp A &kp A &kp A &kp A &kp A    &kp A &kp A &kp A &kp A &kp A &kp A &kp A  &none       &none
+                &kp A &kp A &none &kp A &kp A &kp A &kp A    &kp A &kp A &kp A &kp A &none &kp A &kp A  &none       &none
             >;
         };
     };
