@@ -83,4 +83,6 @@
             device = <&anin1>;
             input-processors = <&pointer_accel>;
         };
+
+    
  };
