@@ -18,11 +18,11 @@
         rows = <5>;
         map = <
             /* 左手(0-6)                                                        右手(7-13)                                                              左joy-con       右joy-con */
-            MAP(0,6) MAP(0,5) MAP(0,4) MAP(0,3) MAP(0,2) MAP(0,1) MAP(0,0)      MAP(0,7) MAP(0,8) MAP(0,9) MAP(0,10) MAP(0,11) MAP(0,12) MAP(0,13)      MAP(0,14)   MAP(0,15)
-            MAP(1,6) MAP(1,5) MAP(1,4) MAP(1,3) MAP(1,2) MAP(1,1) MAP(1,0)      MAP(1,7) MAP(1,8) MAP(1,9) MAP(1,10) MAP(1,11) MAP(1,12) MAP(1,13)
+            MAP(0,6) MAP(0,5) MAP(0,4) MAP(0,3) MAP(0,2) MAP(0,1)                        MAP(0,8) MAP(0,9) MAP(0,10) MAP(0,11) MAP(0,12) MAP(0,13)      MAP(0,14)   MAP(0,15)
+            MAP(1,6) MAP(1,5) MAP(1,4) MAP(1,3) MAP(1,2) MAP(1,1)                        MAP(1,8) MAP(1,9) MAP(1,10) MAP(1,11) MAP(1,12) MAP(1,13)
             MAP(2,6) MAP(2,5) MAP(2,4) MAP(2,3) MAP(2,2) MAP(2,1) MAP(2,0)      MAP(2,7) MAP(2,8) MAP(2,9) MAP(2,10) MAP(2,11) MAP(2,12) MAP(2,13)
             MAP(3,6) MAP(3,5) MAP(3,4) MAP(3,3) MAP(3,2) MAP(3,1) MAP(3,0)      MAP(3,7) MAP(3,8) MAP(3,9) MAP(3,10) MAP(3,11) MAP(3,12) MAP(3,13)
-            MAP(4,6) MAP(4,5) MAP(4,4) MAP(4,3) MAP(4,2) MAP(4,1) MAP(4,0)      MAP(4,7) MAP(4,8) MAP(4,9) MAP(4,10) MAP(4,11) MAP(4,12) MAP(4,13)
+            MAP(4,6) MAP(4,5)          MAP(4,3) MAP(4,2) MAP(4,1) MAP(4,0)      MAP(4,7) MAP(4,8) MAP(4,9) MAP(4,10)           MAP(4,12) MAP(4,13)
         >;
     };
 
@@ -67,5 +67,98 @@
             row-offset = <0>;
             column-offset = <15>;
         };
+    };
+    physical_layout0: physical_layout_0 {
+        compatible = "zmk,physical-layout";
+        display-name = "Default Layout";
+        transform = <&default_transform>;
+        keys = <
+        &coord_0 { x = <50>; y = <100>; rotation = <0>;};
+        &coord_1 { x = <150>; y = <100>; rotation = <0>;};
+        &coord_2 { x = <250>; y = <75>; rotation = <0>;};
+        &coord_3 { x = <350>; y = <50>; rotation = <0>;};
+        &coord_4 { x = <450>; y = <100>; rotation = <0>;};
+        &coord_5 { x = <550>; y = <100>; rotation = <0>;};
+        &coord_6 { x = <650>; y = <100>; rotation = <0>;};
+        &coord_7 { x = <1050>; y = <100>; rotation = <0>;};
+        &coord_8 { x = <1150>; y = <100>; rotation = <0>;};
+        &coord_9 { x = <1250>; y = <100>; rotation = <0>;};
+        &coord_10 { x = <1350>; y = <50>; rotation = <0>;};
+        &coord_11 { x = <1450>; y = <75>; rotation = <0>;};
+        &coord_12 { x = <1550>; y = <100>; rotation = <0>;};
+        &coord_13 { x = <1650>; y = <100>; rotation = <0>;};
+        &coord_14 { x = <750>; y = <700>; rotation = <0>;};
+        &coord_15 { x = <950>; y = <700>; rotation = <0>;};
+        &coord_16 { x = <50>; y = <200>; rotation = <0>;};
+        &coord_17 { x = <150>; y = <200>; rotation = <0>;};
+        &coord_18 { x = <250>; y = <175>; rotation = <0>;};
+        &coord_19 { x = <350>; y = <150>; rotation = <0>;};
+        &coord_20 { x = <450>; y = <200>; rotation = <0>;};
+        &coord_21 { x = <550>; y = <200>; rotation = <0>;};
+        &coord_22 { x = <650>; y = <200>; rotation = <0>;};
+        &coord_23 { x = <1050>; y = <200>; rotation = <0>;};
+        &coord_24 { x = <1150>; y = <200>; rotation = <0>;};
+        &coord_25 { x = <1250>; y = <200>; rotation = <0>;};
+        &coord_26 { x = <1350>; y = <150>; rotation = <0>;};
+        &coord_27 { x = <1450>; y = <175>; rotation = <0>;};
+        &coord_28 { x = <1550>; y = <200>; rotation = <0>;};
+        &coord_29 { x = <1650>; y = <200>; rotation = <0>;};
+        &coord_30 { x = <50>; y = <300>; rotation = <0>;};
+        &coord_31 { x = <150>; y = <300>; rotation = <0>;};
+        &coord_32 { x = <250>; y = <275>; rotation = <0>;};
+        &coord_33 { x = <350>; y = <250>; rotation = <0>;};
+        &coord_34 { x = <450>; y = <300>; rotation = <0>;};
+        &coord_35 { x = <550>; y = <300>; rotation = <0>;};
+        &coord_36 { x = <650>; y = <300>; rotation = <0>;};
+        &coord_37 { x = <1050>; y = <300>; rotation = <0>;};
+        &coord_38 { x = <1150>; y = <300>; rotation = <0>;};
+        &coord_39 { x = <1250>; y = <300>; rotation = <0>;};
+        &coord_40 { x = <1350>; y = <250>; rotation = <0>;};
+        &coord_41 { x = <1450>; y = <275>; rotation = <0>;};
+        &coord_42 { x = <1550>; y = <300>; rotation = <0>;};
+        &coord_43 { x = <1650>; y = <300>; rotation = <0>;};
+        &coord_44 { x = <50>; y = <400>; rotation = <0>;};
+        &coord_45 { x = <150>; y = <400>; rotation = <0>;};
+        &coord_46 { x = <250>; y = <375>; rotation = <0>;};
+        &coord_47 { x = <350>; y = <350>; rotation = <0>;};
+        &coord_48 { x = <450>; y = <400>; rotation = <0>;};
+        &coord_49 { x = <550>; y = <400>; rotation = <0>;};
+        &coord_50 { x = <650>; y = <400>; rotation = <0>;};
+        &coord_51 { x = <1050>; y = <400>; rotation = <0>;};
+        &coord_52 { x = <1150>; y = <400>; rotation = <0>;};
+        &coord_53 { x = <1250>; y = <400>; rotation = <0>;};
+        &coord_54 { x = <1350>; y = <350>; rotation = <0>;};
+        &coord_55 { x = <1450>; y = <375>; rotation = <0>;};
+        &coord_56 { x = <1550>; y = <400>; rotation = <0>;};
+        &coord_57 { x = <1650>; y = <400>; rotation = <0>;};
+        &coord_58 { x = <50>; y = <500>; rotation = <0>;};
+        &coord_59 { x = <150>; y = <500>; rotation = <0>;};
+        &coord_60 { x = <250>; y = <475>; rotation = <0>;};
+        &coord_61 { x = <350>; y = <450>; rotation = <0>;};
+        &coord_62 { x = <450>; y = <500>; rotation = <0>;};
+        &coord_63 { x = <550>; y = <500>; rotation = <0>;};
+        &coord_64 { x = <650>; y = <500>; rotation = <0>;};
+        &coord_65 { x = <1050>; y = <500>; rotation = <0>;};
+        &coord_66 { x = <1150>; y = <500>; rotation = <0>;};
+        &coord_67 { x = <1250>; y = <500>; rotation = <0>;};
+        &coord_68 { x = <1350>; y = <450>; rotation = <0>;};
+        &coord_69 { x = <1450>; y = <475>; rotation = <0>;};
+        &coord_70 { x = <1550>; y = <500>; rotation = <0>;};
+        &coord_71 { x = <1650>; y = <500>; rotation = <0>;};
+        &coord_72 { x = <50>; y = <600>; rotation = <0>;};
+        &coord_73 { x = <150>; y = <600>; rotation = <0>;};
+        &coord_74 { x = <250>; y = <575>; rotation = <0>;};
+        &coord_75 { x = <350>; y = <550>; rotation = <1000>;};
+        &coord_76 { x = <450>; y = <650>; rotation = <1500>;};
+        &coord_77 { x = <650>; y = <700>; rotation = <0>;};
+        &coord_78 { x = <750>; y = <800>; rotation = <0>;};
+        &coord_79 { x = <950>; y = <800>; rotation = <0>;};
+        &coord_80 { x = <1050>; y = <700>; rotation = <-1500>;};
+        &coord_81 { x = <1250>; y = <650>; rotation = <-1000>;};
+        &coord_82 { x = <1350>; y = <550>; rotation = <0>;};
+        &coord_83 { x = <1450>; y = <575>; rotation = <0>;};
+        &coord_84 { x = <1550>; y = <600>; rotation = <0>;};
+        &coord_85 { x = <1650>; y = <600>; rotation = <0>;};
+        >;
     };
 };
