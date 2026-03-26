@@ -17,7 +17,6 @@
         compatible = "zmk,matrix-transform";
         columns = <16>; /* 14 + 左右各1 = 16 */
         rows = <5>;
-        physical-layout = <&physical_layout0>;
         map = <
             /* 左手(0-6)                                                        右手(7-13)                                                              左joy-con       右joy-con */
             MAP(0,6) MAP(0,5) MAP(0,4) MAP(0,3) MAP(0,2) MAP(0,1)                        MAP(0,8) MAP(0,9) MAP(0,10) MAP(0,11) MAP(0,12) MAP(0,13)      MAP(0,14)   MAP(0,15)
