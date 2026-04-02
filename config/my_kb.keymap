@@ -30,25 +30,24 @@
         };
     };
     macros {
-            // 現在のプロファイルをクリアするマクロ
-            bt_clr_macro: bt_clr_macro {
-                compatible = "zmk,behavior-macro";
-                #binding-cells = <0>;
-                bindings = <&bt BT_CLR>;
-            };
+        // 現在の接続をクリアするだけのマクロ（引数0）
+        bt_clr_only: bt_clr_only {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&bt BT_CLR>;
         };
+    };
 
     behaviors {
-        // 番号(0, 1, 2...)を1つだけ受け取るカスタムHold-Tap
-        // ホールドでクリアマクロ、タップでBT_SELを実行
-        btsc: bt_select_clear {
+        btsc: bt_sel_clr {
             compatible = "zmk,behavior-hold-tap";
             label = "BT_SEL_CLR";
-            #binding-cells = <1>;      // 引数を1つ（番号）に設定
-            tapping-term-ms = <2000>;    // 誤爆防止に長めがおすすめ
+            #binding-cells = <1>; // これなら 1 で通ります
+            tapping-term-ms = <500>;
             flavor = "tap-preferred";
-            bindings = <&bt_clr_macro>, <&bt>; 
-            // ↑ ホールド時はマクロ(引数0)なので番号を無視し、タップ時は&btに番号を渡す
+            // ホールド時はマクロ（引数不要なので番号は無視される）
+            // タップ時は &bt（引数1つ必要なので番号が渡される）
+            bindings = <&bt_clr_only>, <&bt>;
         };
     };
 
