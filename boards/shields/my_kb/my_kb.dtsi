@@ -79,6 +79,7 @@
                     , <&mkp LCLK>
                     ;
             };
+            
         };
     behaviors {
         dc_tap: double_click_tap {

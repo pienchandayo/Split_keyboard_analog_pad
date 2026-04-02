@@ -188,6 +188,7 @@
       ],
       "track_widths": [
         0.0,
+        0.5,
         1.0
       ],
       "tuning_pattern_settings": {
@@ -498,13 +499,13 @@
   },
   "pcbnew": {
     "last_paths": {
-      "gencad": "",
+      "gencad": "Split_keyboard_analog_pad.cad",
       "idf": "",
       "netlist": "",
-      "plot": "",
+      "plot": "../../../../デスクトップ/",
       "pos_files": "",
       "specctra_dsn": "",
-      "step": "",
+      "step": "Split_keyboard_analog_pad.step",
       "svg": "",
       "vrml": ""
     },

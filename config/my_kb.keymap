@@ -15,18 +15,40 @@
                 &kp GRAVE           &kp Q           &kp W           &kp E           &kp R           &kp T                                                   &kp Y   &kp U           &kp I       &kp O               &kp P           &kp BACKSLASH       
                 &kp TAB             &kp A           &kp S           &kp D           &kp F           &kp G           &kp LEFT_BRACKET    &kp RIGHT_BRACKET   &kp H   &kp J           &kp K       &kp L               &kp SEMICOLON   &kp SINGLE_QUOTE
                 &kp LEFT_SHIFT      &kp Z           &kp X           &kp C           &kp V           &kp B           &kp A               &kp A               &kp N   &kp M           &kp COMMA   &kp DOT             &kp SLASH       &kp DELETE          
-                &kp LEFT_CONTROL    &kp LEFT_WIN                    &kp LEFT_ALT    &kp SPACE       &mo 1           &kp LEFT_SHIFT      &kp RIGHT_SHIFT     &mo 1   &kp ENTER       &none                           &none           &none
+                &kp LEFT_CONTROL    &kp LEFT_WIN                    &kp LEFT_ALT    &kp SPACE       &mo 1           &kp LEFT_SHIFT      &kp RIGHT_SHIFT     &mo 1   &kp ENTER       &kp F4                          &kp F7          &kp F10
             >;
         };
         layer_1 {
             // 7列(左) + 7列(右) = 14列 × 5行 = 全70キー分
             bindings = <
-                &none               &none           &none           &none           &kp F4          &none                                                   &none   &kp F7          &none           &none              &kp F10         &none               &none       &none
+                &none               &btsc 0         &btsc 1         &btsc 2         &kp F4          &none                                                   &none   &kp F7          &none           &none              &kp F10         &none               &none       &none
                 &none               &none           &none           &kp UP          &none           &none                                                   &none   &msc SCRL_LEFT  &msc SCRL_UP    &msc SCRL_RIGHT    &none           &none           
                 &none               &none           &kp LEFT        &kp DOWN        &kp RIGHT       &none           &none               &none               &none   &mkp LCLK       &mkp MCLK       &mkp RCLK          &none           &none           
                 &none               &none           &none           &none           &none           &none           &none               &none               &none   &none           &msc SCRL_DOWN  &none              &none           &none           
                 &none               &none                           &none           &none           &trans          &none               &none               &trans  &none           &none                              &none           &none           
             >;
+        };
+    };
+    macros {
+            // 現在のプロファイルをクリアするマクロ
+            bt_clr_macro: bt_clr_macro {
+                compatible = "zmk,behavior-macro";
+                #binding-cells = <0>;
+                bindings = <&bt BT_CLR>;
+            };
+        };
+
+    behaviors {
+        // 番号(0, 1, 2...)を1つだけ受け取るカスタムHold-Tap
+        // ホールドでクリアマクロ、タップでBT_SELを実行
+        btsc: bt_select_clear {
+            compatible = "zmk,behavior-hold-tap";
+            label = "BT_SEL_CLR";
+            #binding-cells = <1>;      // 引数を1つ（番号）に設定
+            tapping-term-ms = <2000>;    // 誤爆防止に長めがおすすめ
+            flavor = "tap-preferred";
+            bindings = <&bt_clr_macro>, <&bt>; 
+            // ↑ ホールド時はマクロ(引数0)なので番号を無視し、タップ時は&btに番号を渡す
         };
     };
 
