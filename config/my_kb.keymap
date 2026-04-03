@@ -5,6 +5,20 @@
 
 
 / {
+    behaviors {
+            // 引数を2つ受け取るHold-Tapの定義
+            // 1つ目の引数がホールド時、2つ目の引数がタップ時に渡されます
+        bts: bt_sel_clr {
+            compatible = "zmk,behavior-hold-tap";
+            label = "BT_SEL_CLR";
+            #binding-cells = <2>;        // 引数は2つ必要
+            tapping-term-ms = <500>;    // 誤操作防止のため長めに設定
+            quick-tap-ms = <0>;
+            flavor = "tap-preferred";   // タップ（選択）を優先
+            bindings = <&bt>, <&bt>;    // ホールドで1つ目、タップで2つ目の&btを実行
+        };
+    };
+    
     keymap {
         compatible = "zmk,keymap";
 
@@ -29,17 +43,5 @@
             >;
         };
     };
-    behaviors {
-            // 引数を2つ受け取るHold-Tapの定義
-            // 1つ目の引数がホールド時、2つ目の引数がタップ時に渡されます
-        bts: bt_sel_clr {
-            compatible = "zmk,behavior-hold-tap";
-            label = "BT_SEL_CLR";
-            #binding-cells = <2>;        // 引数は2つ必要
-            tapping-term-ms = <500>;    // 誤操作防止のため長めに設定
-            quick-tap-ms = <0>;
-            flavor = "tap-preferred";   // タップ（選択）を優先
-            bindings = <&bt>, <&bt>;    // ホールドで1つ目、タップで2つ目の&btを実行
-        };
-    };
+
 };
