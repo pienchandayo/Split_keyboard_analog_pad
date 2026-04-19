@@ -19,4 +19,6 @@ endif
 if SHIELD_MY_KB_LEFT || SHIELD_MY_KB_RIGHT
     config ZMK_SPLIT
         default y
+    config BT_CTLR_TX_PWR_PLUS_8
+        default y
 endif
