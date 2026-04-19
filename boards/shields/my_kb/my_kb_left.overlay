@@ -36,55 +36,55 @@
 };
 
 / {
-	anin1: analog_input_1 {
-		compatible = "zmk,analog-input";
-        //compatible = "zmk,behavior-input-two-axis";
-		sampling-hz = <100>;
-		x-ch {
-			io-channels = <&adc 5>; // <--- see ain-map.png for nRF52840
-			mv-mid = <1650>;
-			mv-min-max = <1600>;
-			mv-deadzone = <100>;
-			scale-multiplier = <1>;
-			scale-divisor = <100>;
-			invert;
-			evt-type = <INPUT_EV_REL>;
-			//input-code = <INPUT_REL_HWHEEL>;
-            input-code = <INPUT_REL_X>;
-		};
-		y-ch {
-			io-channels = <&adc 0>; // <--- see ain-map.png for nRF52840
-			mv-mid = <1650>;
-			mv-min-max = <1600>;
-			mv-deadzone = <100>;
-			scale-multiplier = <1>;
-			scale-divisor = <100>;
-			invert;
-			evt-type = <INPUT_EV_REL>;
-			//input-code = <INPUT_REL_WHEEL>;
-            input-code = <INPUT_REL_Y>;
-		};
-	};
+	// anin1: analog_input_1 {
+	// 	compatible = "zmk,analog-input";
+    //     //compatible = "zmk,behavior-input-two-axis";
+	// 	sampling-hz = <100>;
+	// 	x-ch {
+	// 		io-channels = <&adc 5>; // <--- see ain-map.png for nRF52840
+	// 		mv-mid = <1650>;
+	// 		mv-min-max = <1600>;
+	// 		mv-deadzone = <100>;
+	// 		scale-multiplier = <1>;
+	// 		scale-divisor = <100>;
+	// 		invert;
+	// 		evt-type = <INPUT_EV_REL>;
+	// 		//input-code = <INPUT_REL_HWHEEL>;
+    //         input-code = <INPUT_REL_X>;
+	// 	};
+	// 	y-ch {
+	// 		io-channels = <&adc 0>; // <--- see ain-map.png for nRF52840
+	// 		mv-mid = <1650>;
+	// 		mv-min-max = <1600>;
+	// 		mv-deadzone = <100>;
+	// 		scale-multiplier = <1>;
+	// 		scale-divisor = <100>;
+	// 		invert;
+	// 		evt-type = <INPUT_EV_REL>;
+	// 		//input-code = <INPUT_REL_WHEEL>;
+    //         input-code = <INPUT_REL_Y>;
+	// 	};
+	// };
 
-    pointer_accel: pointer_accel {
-        compatible = "zmk,input-processor-acceleration";
-        #input-processor-cells = <0>;
-        /* --- ここを修正： 'type' ではなく 'input-type' --- */
-        input-type = <INPUT_EV_REL>; 
-        min-factor = <10>;
-        max-factor = <2000>;
-        speed-threshold = <1000>;
-        speed-max = <6000>;
-        acceleration-exponent = <3>;
-        track-remainders;
-    };
+    // pointer_accel: pointer_accel {
+    //     compatible = "zmk,input-processor-acceleration";
+    //     #input-processor-cells = <0>;
+    //     /* --- ここを修正： 'type' ではなく 'input-type' --- */
+    //     input-type = <INPUT_EV_REL>; 
+    //     min-factor = <10>;
+    //     max-factor = <2000>;
+    //     speed-threshold = <1000>;
+    //     speed-max = <6000>;
+    //     acceleration-exponent = <3>;
+    //     track-remainders;
+    // };
 
-    tpad1: tpad1 {
-            compatible = "zmk,input-listener";
-            status = "okay";
-            device = <&anin1>;
-            input-processors = <&pointer_accel>;
-        };
+    // tpad1: tpad1 {
+    //         compatible = "zmk,input-listener";
+    //         status = "okay";
+    //         device = <&anin1>;
+    //         input-processors = <&pointer_accel>;
+    //     };
 
     
  };
