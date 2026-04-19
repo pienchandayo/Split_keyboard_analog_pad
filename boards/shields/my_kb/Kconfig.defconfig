@@ -9,9 +9,6 @@ endif
 if SHIELD_MY_KB_RIGHT
     config ZMK_KEYBOARD_NAME
     	default "kb_r"
-    
-    config ZMK_SPLIT_BLE_ROLE_CENTRAL
-    	default y
 endif
 
 
