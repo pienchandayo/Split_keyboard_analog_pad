@@ -19,6 +19,7 @@ endif
 if SHIELD_MY_KB_LEFT || SHIELD_MY_KB_RIGHT
     config ZMK_SPLIT
         default y
-    config BT_CTLR_TX_PWR_PLUS_8
-        default y
+    # choice項目（BT_CTLR_TX_PWR）のデフォルト値を直接指定する
+    config BT_CTLR_TX_PWR
+        default "PLUS_8"
 endif
