@@ -1,7 +1,5 @@
 if SHIELD_MY_KB_LEFT
-    config ZMK_KEYBOARD_NAME
 
-        default "my_kb_left"
 
     # 左側をセントラル（親機）に設定
     config ZMK_SPLIT_ROLE_CENTRAL
@@ -12,6 +10,9 @@ if SHIELD_MY_KB_RIGHT
     # 右側はペリフェラル（子機）なので、セントラルを n にする
     config ZMK_SPLIT_ROLE_CENTRAL
         default y
+    config ZMK_KEYBOARD_NAME
+
+        default "SPLIT KEY"
 endif
 
 if SHIELD_MY_KB_LEFT || SHIELD_MY_KB_RIGHT
