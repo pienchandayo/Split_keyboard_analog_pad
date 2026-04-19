@@ -5,13 +5,13 @@ if SHIELD_MY_KB_LEFT
 
     # 左側をセントラル（親機）に設定
     config ZMK_SPLIT_ROLE_CENTRAL
-        default y
+        default n
 endif
 
 if SHIELD_MY_KB_RIGHT
     # 右側はペリフェラル（子機）なので、セントラルを n にする
     config ZMK_SPLIT_ROLE_CENTRAL
-        default n
+        default y
 endif
 
 if SHIELD_MY_KB_LEFT || SHIELD_MY_KB_RIGHT
