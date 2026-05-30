@@ -1,10 +1,12 @@
 #include "my_kb.dtsi"
 #include <dt-bindings/zmk/pointing.h>
 #include <behaviors/input_gestures_accel.dtsi>
+
 &default_transform {
     col-offset = <7>; // 右手側だけこれが必要
 };
-&kscan0 {
+
+&main_kscan {
     /* CL0 から CL6 までの 7本 */
     col-gpios
         = <&gpio0 24 GPIO_ACTIVE_HIGH> /* CL0: P0.24 (Pin 8)  */
@@ -26,46 +28,46 @@
         ;
 };
 
-&adc {
-	status = "okay";
-};
+/* 右手のアナログパッド用クリックピンをここで参照定義 */
 &kscan_direct {
-    //analog padのボタンの割り当て
-    input-gpios
-        = <&gpio0 31 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
+    input-gpios = <&gpio0 31 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
 };
+
+&adc {
+    status = "okay";
+};
+
 / {
-	anin0: analog_input_0 {
-		compatible = "zmk,analog-input";
-		sampling-hz = <100>;
-		x-ch {
-			io-channels = <&adc 5>; // <--- see ain-map.png for nRF52840
-			mv-mid = <1650>;
-			mv-min-max = <1600>;
-			mv-deadzone = <100>;
-			scale-multiplier = <1>;
-			scale-divisor = <50>;
-			invert;
-			evt-type = <INPUT_EV_REL>;
-			input-code = <INPUT_REL_X>;
-		};
-		y-ch {
-			io-channels = <&adc 0>; // <--- see ain-map.png for nRF52840
-			mv-mid = <1650>;
-			mv-min-max = <1600>;
-			mv-deadzone = <100>;
-			scale-multiplier = <1>;
-			scale-divisor = <50>;
-			invert;
-			evt-type = <INPUT_EV_REL>;
-			input-code = <INPUT_REL_Y>;
-		};
-	};
+    anin0: analog_input_0 {
+        compatible = "zmk,analog-input";
+        sampling-hz = <100>;
+        x-ch {
+            io-channels = <&adc 5>;
+            mv-mid = <1650>;
+            mv-min-max = <1600>;
+            mv-deadzone = <100>;
+            scale-multiplier = <1>;
+            scale-divisor = <50>;
+            invert;
+            evt-type = <INPUT_EV_REL>;
+            input-code = <INPUT_REL_X>;
+        };
+        y-ch {
+            io-channels = <&adc 0>;
+            mv-mid = <1650>;
+            mv-min-max = <1600>;
+            mv-deadzone = <100>;
+            scale-multiplier = <1>;
+            scale-divisor = <50>;
+            invert;
+            evt-type = <INPUT_EV_REL>;
+            input-code = <INPUT_REL_Y>;
+        };
+    };
 
     pointer_accel: pointer_accel {
         compatible = "zmk,input-processor-acceleration";
         #input-processor-cells = <0>;
-        /* --- ここを修正： 'type' ではなく 'input-type' --- */
         input-type = <INPUT_EV_REL>; 
         min-factor = <800>;
         max-factor = <3000>;
@@ -76,14 +78,9 @@
     };
 
     tpad0: tpad0 {
-            compatible = "zmk,input-listener";
-            status = "okay";
-            device = <&anin0>;
-            input-processors = <&pointer_accel>;
-        };
-    kscan_direct: kscan_direct {
-    compatible = "zmk,kscan-gpio-direct";
-    input-gpios
-        = <&gpio0 31 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>; // P0.31を使用する場合
+        compatible = "zmk,input-listener";
+        status = "okay";
+        device = <&anin0>;
+        input-processors = <&pointer_accel>;
     };
 };

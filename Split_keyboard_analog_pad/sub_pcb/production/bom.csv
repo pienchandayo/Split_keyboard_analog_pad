@@ -1,0 +1,4 @@
+﻿Designator,Footprint,Quantity,Value,LCSC Part #
+"COL0, COL1, ROW1",TestPoint_Pad_1.5x1.5mm,3,TestPoint,
+"D1, D2",D_SOD-523,2,1N4148WT,
+"SW1, SW2",SW_Kailh_Choc_V1V2_1.00u,2,SW_Push,

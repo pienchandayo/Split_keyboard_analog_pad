@@ -1,0 +1,5 @@
+﻿Designator,Footprint,Quantity,Value,LCSC Part #
+"BTN1, COL1, GND1, ROW1, VCC1, X1, Y1",TestPoint_Pad_1.5x1.5mm,7,TestPoint,
+D1,D_SOD-523,1,1N4148WT,
+J1,Switch_joy_pad,1,Conn_01x05_Pin,
+SW1,SW_Kailh_Choc_V1V2_1.00u,1,SW_Push,

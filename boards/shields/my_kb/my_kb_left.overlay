@@ -2,89 +2,37 @@
 #include <behaviors/input_gestures_accel.dtsi>
 #include <zephyr/dt-bindings/input/input-event-codes.h>
 
-
-&adc {
-	status = "okay";
-};
-
-&kscan0 {
+&main_kscan {
     /* CL0 から CL6 までの 7本 */
     col-gpios
-        = <&gpio0 24 GPIO_ACTIVE_HIGH> /* CL0: P0.24 (Pin 8)  */
-        , <&gpio1  0 GPIO_ACTIVE_HIGH> /* CL1: P1.00 (Pin 9)  */
-        , <&gpio0 11 GPIO_ACTIVE_HIGH> /* CL2: P0.11 (Pin 10) */
-        , <&gpio1  4 GPIO_ACTIVE_HIGH> /* CL3: P1.04 (Pin 11) */
-        , <&gpio1  6 GPIO_ACTIVE_HIGH> /* CL4: P1.06 (Pin 12) */
-        , <&gpio0 10 GPIO_ACTIVE_HIGH> /* CL5: P0.10 (Pin 14) */
-        , <&gpio0  9 GPIO_ACTIVE_HIGH> /* CL6: P0.09 (Pin 13) */
+        = <&gpio0 24 GPIO_ACTIVE_HIGH>
+        , <&gpio1  0 GPIO_ACTIVE_HIGH>
+        , <&gpio0 11 GPIO_ACTIVE_HIGH>
+        , <&gpio1  4 GPIO_ACTIVE_HIGH>
+        , <&gpio1  6 GPIO_ACTIVE_HIGH>
+        , <&gpio0 10 GPIO_ACTIVE_HIGH>
+        , <&gpio0  9 GPIO_ACTIVE_HIGH>
         ;
 
     /* RL0 から RL4 までの 5本 */
     row-gpios
-        = <&gpio0  6 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)> /* RL0: P0.06 (Pin 1) */
-        , <&gpio0  8 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)> /* RL1: P0.08 (Pin 2) */
-        , <&gpio0 17 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)> /* RL2: P0.17 (Pin 5) */
-        , <&gpio0 20 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)> /* RL3: P0.20 (Pin 6) */
-        , <&gpio0 22 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)> /* RL4: P0.22 (Pin 7) */
+        = <&gpio0  6 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
+        , <&gpio0  8 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
+        , <&gpio0 17 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
+        , <&gpio0 20 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
+        , <&gpio0 22 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
         ;
 };
 
+/* 左手側にはダイレクトピンが無いので、空のまま status = "disabled" にしてダミー化 */
 &kscan_direct {
-    //analog padのボタンの割り当て
-    input-gpios
-        = <&gpio0 31 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
+    status = "disabled";
+};
+
+&adc {
+    status = "okay";
 };
 
 / {
-	anin1: analog_input_1 {
-		compatible = "zmk,analog-input";
-        //compatible = "zmk,behavior-input-two-axis";
-		sampling-hz = <100>;
-		x-ch {
-			io-channels = <&adc 5>; // <--- see ain-map.png for nRF52840
-			mv-mid = <1650>;
-			mv-min-max = <1600>;
-			mv-deadzone = <100>;
-			scale-multiplier = <1>;
-			scale-divisor = <100>;
-			invert;
-			evt-type = <INPUT_EV_REL>;
-			input-code = <INPUT_REL_HWHEEL>;
-            //input-code = <INPUT_REL_X>;
-		};
-		y-ch {
-			io-channels = <&adc 0>; // <--- see ain-map.png for nRF52840
-			mv-mid = <1650>;
-			mv-min-max = <1600>;
-			mv-deadzone = <100>;
-			scale-multiplier = <1>;
-			scale-divisor = <100>;
-			invert;
-			evt-type = <INPUT_EV_REL>;
-			input-code = <INPUT_REL_WHEEL>;
-            //input-code = <INPUT_REL_Y>;
-		};
-	};
-
-    pointer_accel: pointer_accel {
-        compatible = "zmk,input-processor-acceleration";
-        #input-processor-cells = <0>;
-        /* --- ここを修正： 'type' ではなく 'input-type' --- */
-        input-type = <INPUT_EV_REL>; 
-        min-factor = <10>;
-        max-factor = <2000>;
-        speed-threshold = <1000>;
-        speed-max = <6000>;
-        acceleration-exponent = <3>;
-        track-remainders;
-    };
-
-    tpad1: tpad1 {
-            compatible = "zmk,input-listener";
-            status = "okay";
-            device = <&anin1>;
-            input-processors = <&pointer_accel>;
-        };
-
-    
- };
+    // アナログ入力1（コメントアウトのままなら省略可）
+};
