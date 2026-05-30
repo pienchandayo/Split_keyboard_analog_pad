@@ -25,9 +25,9 @@
 };
 
 /* 左手側にはダイレクトピンが無いので、空のまま status = "disabled" にしてダミー化 */
-&kscan_direct {
-    status = "disabled";
-};
+// &kscan_direct {
+//     status = "disabled";
+// };
 
 // &adc {
 //     status = "okay";
