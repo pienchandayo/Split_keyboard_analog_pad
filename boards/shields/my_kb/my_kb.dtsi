@@ -2,27 +2,26 @@
 #include <dt-bindings/zmk/keys.h>
 #include <dt-bindings/zmk/mouse.h> 
 #include <input/processors.dtsi>
-#include <physical_layouts.dtsi>
 
 #define MAP(row, col) ((row * 16) + col)
 
 / {
     chosen {
         zmk,kscan = &kscan0;
+        zmk,matrix-transform = &default_transform;
+        // 物理レイアウトの選択もここに明示しておきます
+        zmk,physical-layout = &default_layout;
     };
 
     kscan0: kscan_composite {
         compatible = "zmk,kscan-composite";
-        // 全体の最大サイズを指定（5行 × 14列）
         rows = <5>;
         columns = <14>;
 
-        // ① メインマトリクスを配置
         matrix {
             kscan = <&main_kscan>;
         };
 
-        // ② ダイレクトキーを配置（5行目の14列目。インデックスは0スタートなので4と13）
         direct {
             kscan = <&kscan_direct>;
             row-offset = <4>;
@@ -30,6 +29,8 @@
         };
     };
 
+    // ZMKのシステムが要求するリンカー名に合わせるため、
+    // ラベルとノード名の両方を「default_transform」にします
     default_transform: default_transform {
         compatible = "zmk,matrix-transform";
         columns = <14>;
@@ -41,20 +42,24 @@
             MAP(2,0) MAP(2,1) MAP(2,2) MAP(2,3) MAP(2,4) MAP(2,5) MAP(2,6)      MAP(2,7) MAP(2,8) MAP(2,9) MAP(2,10) MAP(2,11) MAP(2,12) MAP(2,13)
             MAP(3,0) MAP(3,1) MAP(3,2) MAP(3,3) MAP(3,4) MAP(3,5) MAP(3,6)      MAP(3,7) MAP(3,8) MAP(3,9) MAP(3,10) MAP(3,11) MAP(3,12) MAP(3,13)
             MAP(4,0) MAP(4,1)          MAP(4,3) MAP(4,4) MAP(4,5) MAP(4,6)      MAP(4,7) MAP(4,8) MAP(4,9) MAP(4,10)           MAP(4,12) MAP(4,13) 
-            
-            /* 【追加】右手アナログパッドのクリックボタン (5行目の14列目 = MAP(4,13)) */
-            /* もしすでに上のMAP(4,13)が別の物理キーで使われているなら、MAP(4,14)などの空き地にズラしてください */
         >;
     };
 
-    /* 既存のマトリックス（大枠定義） */
+    // 【最重要】エラーを消すための物理レイアウト明記
+    // ここで上記で作った「default_transform」をガッチリ固定します
+    default_layout: default_layout {
+        compatible = "zmk,physical-layout";
+        display-name = "Default Layout";
+        transform = <&default_transform>; // ここでエラーの原因を解消
+        kscan = <&kscan0>;
+    };
+
     main_kscan: kscan {
         compatible = "zmk,kscan-gpio-matrix";
         label = "KSCAN";
         diode-direction = "col2row";
     };
 
-    /* 単体スイッチ（大枠定義） */
     kscan_direct: kscan_direct {
         compatible = "zmk,kscan-gpio-direct";
         label = "DIRECT_KSCAN";
