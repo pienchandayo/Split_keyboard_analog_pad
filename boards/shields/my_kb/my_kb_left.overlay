@@ -24,3 +24,16 @@
         ;
 };
 
+/* 左手側にはダイレクトピンが無いので、空のまま status = "disabled" にしてダミー化 */
+&kscan_direct {
+    status = "okay"; // disabled から okay に変更
+    input-gpios = <&gpio0 2 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>; // 余っているダミーピンを指定
+};
+
+// &adc {
+//     status = "okay";
+// };
+
+// / {
+//     // アナログ入力1（コメントアウトのままなら省略可）
+// };
