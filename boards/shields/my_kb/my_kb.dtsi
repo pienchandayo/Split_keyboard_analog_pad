@@ -20,6 +20,7 @@
 
         matrix {
             kscan = <&main_kscan>;
+            col-offset = <7>;
         };
 
         direct {
@@ -33,7 +34,7 @@
     // ラベルとノード名の両方を「default_transform」にします
     default_transform: default_transform {
         compatible = "zmk,matrix-transform";
-        columns = <13>;
+        columns = <15>;
         rows = <5>;
         map = <
             /* 左手(0-6)                                                        右手(7-13)                                                             右joy-con     */
