@@ -20,7 +20,7 @@
 
         matrix {
             kscan = <&main_kscan>;
-            col-offset = <7>;
+            col-offset = <8>;
         };
 
         direct {
