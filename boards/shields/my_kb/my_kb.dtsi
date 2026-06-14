@@ -67,4 +67,15 @@
         compatible = "zmk,kscan-gpio-direct";
         label = "DIRECT_KSCAN";
     };
+    left_kscan: left_kscan_node {
+    compatible = "zmk,kscan-gpio-matrix";
+    diode-direction = "col2row";
+    // ⚠️ ここにはピンを書かず、名前と属性だけを定義しておきます
+    };
+
+// 右手マトリックスの実体を空で定義
+    right_kscan: right_kscan_node {
+        compatible = "zmk,kscan-gpio-matrix";
+        diode-direction = "col2row";
+    };
 };
