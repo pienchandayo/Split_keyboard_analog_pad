@@ -3,7 +3,6 @@
 #include <behaviors/input_gestures_accel.dtsi>
 
 
-
 &main_kscan {
     /* CL0 から CL6 までの 7本 *
     col-gpios
