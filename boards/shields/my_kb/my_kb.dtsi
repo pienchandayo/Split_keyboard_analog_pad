@@ -16,7 +16,7 @@
     kscan0: kscan_composite {
         compatible = "zmk,kscan-composite";
         rows = <5>;
-        columns = <14>;
+        columns = <15>;
 
         matrix {
             kscan = <&main_kscan>;
@@ -24,8 +24,8 @@
 
         direct {
             kscan = <&kscan_direct>;
-            row-offset = <4>;
-            col-offset = <13>;
+            // row-offset = <4>;
+            col-offset = <14>;
         };
     };
 
@@ -33,7 +33,7 @@
     // ラベルとノード名の両方を「default_transform」にします
     default_transform: default_transform {
         compatible = "zmk,matrix-transform";
-        columns = <14>;
+        columns = <13>;
         rows = <5>;
         map = <
             /* 左手(0-6)                                                        右手(7-13)                                                             右joy-con     */
