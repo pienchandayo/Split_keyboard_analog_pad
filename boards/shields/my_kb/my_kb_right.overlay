@@ -2,7 +2,7 @@
 #include <dt-bindings/zmk/pointing.h>
 #include <behaviors/input_gestures_accel.dtsi>
 
-&main_kscan {
+&default_transform {
     col-offset = <7>; // 右手側だけこれが必要
 };
 
