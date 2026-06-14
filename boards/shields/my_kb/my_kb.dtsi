@@ -18,10 +18,13 @@
         rows = <5>;
         columns = <15>;
 
-        matrix {
-            kscan = <&main_kscan>;
+        matrix_l {
+            kscan = <&left_kscan>;
         };
-
+        matrix_r {
+            kscan = <&right_kscan>;
+            col-offset = <7>;
+        };
         direct {
             kscan = <&kscan_direct>;
             // row-offset = <4>;
