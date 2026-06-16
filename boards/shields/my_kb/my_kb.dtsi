@@ -64,12 +64,12 @@
         kscan = <&kscan0>;
     };
 
-    main_kscan_l: kscan {
+    main_kscan_l: main_kscan_l {
         compatible = "zmk,kscan-gpio-matrix";
         label = "KSCAN";
         diode-direction = "col2row";
     };
-    main_kscan_r: kscan {
+    main_kscan_r: main_kscan_r {
         compatible = "zmk,kscan-gpio-matrix";
         label = "KSCAN";
         diode-direction = "col2row";
