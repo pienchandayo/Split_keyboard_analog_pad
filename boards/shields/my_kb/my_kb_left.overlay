@@ -1,52 +1,29 @@
 #include "my_kb.dtsi"
 // #include <behaviors/input_gestures_accel.dtsi>
 // #include <zephyr/dt-bindings/input/input-event-codes.h>
-/ {
-    left_kscan: left_kscan_node {
-        compatible = "zmk,kscan-gpio-matrix";
-        diode-direction = "col2row";
-        col-gpios
-            = <&gpio0 24 GPIO_ACTIVE_HIGH>
-            , <&gpio1  0 GPIO_ACTIVE_HIGH>
-            , <&gpio0 11 GPIO_ACTIVE_HIGH>
-            , <&gpio1  4 GPIO_ACTIVE_HIGH>
-            , <&gpio1  6 GPIO_ACTIVE_HIGH>
-            , <&gpio0 10 GPIO_ACTIVE_HIGH>
-            , <&gpio0  9 GPIO_ACTIVE_HIGH>
+
+
+&main_kscan {
+    /* CL0 から CL6 までの 7本 */
+    col-gpios
+        = <&gpio0 24 GPIO_ACTIVE_HIGH>
+        , <&gpio1  0 GPIO_ACTIVE_HIGH>
+        , <&gpio0 11 GPIO_ACTIVE_HIGH>
+        , <&gpio1  4 GPIO_ACTIVE_HIGH>
+        , <&gpio1  6 GPIO_ACTIVE_HIGH>
+        , <&gpio0 10 GPIO_ACTIVE_HIGH>
+        , <&gpio0  9 GPIO_ACTIVE_HIGH>
         ;
 
     /* RL0 から RL4 までの 5本 */
-        row-gpios
-                = <&gpio0  6 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
-                , <&gpio0  8 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
-                , <&gpio0 17 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
-                , <&gpio0 20 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
-                , <&gpio0 22 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
-            ;
-        };
+    row-gpios
+        = <&gpio0  6 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
+        , <&gpio0  8 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
+        , <&gpio0 17 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
+        , <&gpio0 20 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
+        , <&gpio0 22 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
+        ;
 };
-
-// &left_kscan {
-//     /* CL0 から CL6 までの 7本 */
-//     col-gpios
-//         = <&gpio0 24 GPIO_ACTIVE_HIGH>
-//         , <&gpio1  0 GPIO_ACTIVE_HIGH>
-//         , <&gpio0 11 GPIO_ACTIVE_HIGH>
-//         , <&gpio1  4 GPIO_ACTIVE_HIGH>
-//         , <&gpio1  6 GPIO_ACTIVE_HIGH>
-//         , <&gpio0 10 GPIO_ACTIVE_HIGH>
-//         , <&gpio0  9 GPIO_ACTIVE_HIGH>
-//         ;
-
-//     /* RL0 から RL4 までの 5本 */
-//     row-gpios
-//         = <&gpio0  6 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
-//         , <&gpio0  8 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
-//         , <&gpio0 17 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
-//         , <&gpio0 20 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
-//         , <&gpio0 22 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
-//         ;
-// };
 
 /* 左手側にはダイレクトピンが無いので、空のまま status = "disabled" にしてダミー化 */
 &kscan_direct {
