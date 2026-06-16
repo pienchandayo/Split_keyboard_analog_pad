@@ -1,7 +1,11 @@
 #include "my_kb.dtsi"
 #include <dt-bindings/zmk/pointing.h>
 #include <behaviors/input_gestures_accel.dtsi>
-&main_kscan_r {
+
+&default_transform {
+    col-offset = <7>;
+};
+&main_kscan {
     // CL0 から CL6 までの 7本
     col-gpios
         = <&gpio0 24 GPIO_ACTIVE_HIGH> /* CL0: P0.24 (Pin 8)  */

@@ -3,7 +3,7 @@
 // #include <zephyr/dt-bindings/input/input-event-codes.h>
 
 
-&main_kscan_l {
+&main_kscan {
     /* CL0 から CL6 までの 7本 */
     col-gpios
         = <&gpio0 24 GPIO_ACTIVE_HIGH>
