@@ -18,12 +18,15 @@
         rows = <5>;
         columns = <15>;
 
-        matrix {
-            kscan = <&main_kscan>;
+        matrix_r {
+            kscan = <&main_kscan_l>;
+        };
+        matrix_l {
+            kscan = <&main_kscan_r>;
+            col-offset = <7>;
         };
         direct {
             kscan = <&kscan_direct>;
-            // row-offset = <4>;
             col-offset = <14>;
         };
     };
@@ -61,12 +64,16 @@
         kscan = <&kscan0>;
     };
 
-    main_kscan: kscan {
+    main_kscan_l: kscan {
         compatible = "zmk,kscan-gpio-matrix";
         label = "KSCAN";
         diode-direction = "col2row";
     };
-
+    main_kscan_r: kscan {
+        compatible = "zmk,kscan-gpio-matrix";
+        label = "KSCAN";
+        diode-direction = "col2row";
+    };
     kscan_direct: kscan_direct {
         compatible = "zmk,kscan-gpio-direct";
         label = "DIRECT_KSCAN";
