@@ -27,9 +27,7 @@
         >;
     };
     main_kscan: kscan_main_base {
-            compatible = "zmk,kscan-gpio-matrix";
-            diode-direction = "col2row";
-        };
+    };
 
 };
 
