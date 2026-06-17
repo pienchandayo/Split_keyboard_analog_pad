@@ -30,7 +30,6 @@
     // 右手直結のJoy-Con用ダイレクトキースキャン定義
     kscan_direct: kscan_direct {
         compatible = "zmk,kscan-gpio-direct";
-        input-gpios = <&gpio0 31 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>; 
     };
     anin0: analog_input_0 {
         compatible = "zmk,analog-input";
@@ -39,7 +38,7 @@
             io-channels = <&adc 5>;
             mv-mid = <1650>;
             mv-min-max = <1600>;
-            mv-deadzone = <10>;
+            mv-deadzone = <30>;
             scale-multiplier = <1>;
             scale-divisor = <50>;
             evt-type = <INPUT_EV_REL>;
@@ -49,7 +48,7 @@
             io-channels = <&adc 0>;
             mv-mid = <1650>;
             mv-min-max = <1600>;
-            mv-deadzone = <10>;
+            mv-deadzone = <30>;
             scale-multiplier = <1>;
             scale-divisor = <50>;
             invert;
