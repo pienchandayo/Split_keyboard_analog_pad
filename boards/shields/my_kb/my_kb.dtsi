@@ -3,7 +3,6 @@
 / {
     chosen {
         // デフォルトのキースキャン（各overlay側で差し替え・拡張されます）
-        zmk,kscan = &main_kscan;
         zmk,matrix-transform = &default_transform;
         zmk,physical-layout = &default_layout;
     };
@@ -25,8 +24,6 @@
             RC(3,0) RC(3,1) RC(3,2) RC(3,3) RC(3,4) RC(3,5) RC(3,6)                         RC(3,7) RC(3,8) RC(3,9) RC(3,10) RC(3,11) RC(3,12) RC(3,13)
             RC(4,0) RC(4,1)         RC(4,3) RC(4,4) RC(4,5) RC(4,6)                         RC(4,7)         RC(4,9) RC(4,10)          RC(4,12) RC(4,13) 
         >;
-    };
-    main_kscan: kscan_main_base {
     };
 
 };
