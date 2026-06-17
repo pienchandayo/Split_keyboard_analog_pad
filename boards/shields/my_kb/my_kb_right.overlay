@@ -2,6 +2,81 @@
 #include <dt-bindings/zmk/pointing.h>
 #include <behaviors/input_gestures_accel.dtsi>
 
+/ {
+    // 右手（Master）起動時は、単体のkscanではなく複合kscan（right_composite）を使用する
+    chosen {
+        zmk,kscan = &right_composite;
+    };
+
+    // ⭕ 右手側だけで使う、マトリックスとダイレクトピンの合成ノード
+    right_composite: kscan_composite {
+        compatible = "zmk,kscan-composite";
+        rows = <5>;
+        columns = <15>; // 全体で15列分を確保
+
+        // 右手側の通常マトリックス
+        matrix {
+            kscan = <&main_kscan>;
+            col-offset = <7>; // ★左手が7列(0~6)あるので、右手は「7」からスタート
+        };
+
+        // 右手側のJoy-Conダイレクトピン（ボタン）
+        direct {
+            kscan = <&kscan_direct>;
+            col-offset = <14>; // ★右手が7列(7~13)使うので、Joy-Conは「14」に配置
+        };
+    };
+
+    // 右手直結のJoy-Con用ダイレクトキースキャン定義
+    kscan_direct: kscan_direct {
+        compatible = "zmk,kscan-gpio-direct";
+        input-gpios = <&gpio0 31 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>; 
+    };
+        anin0: analog_input_0 {
+        compatible = "zmk,analog-input";
+        sampling-hz = <100>;
+        x-ch {
+            io-channels = <&adc 5>;
+            mv-mid = <1650>;
+            mv-min-max = <1600>;
+            mv-deadzone = <100>;
+            scale-multiplier = <1>;
+            scale-divisor = <50>;
+            evt-type = <INPUT_EV_REL>;
+            input-code = <INPUT_REL_X>;
+        };
+        y-ch {
+            io-channels = <&adc 0>;
+            mv-mid = <1650>;
+            mv-min-max = <1600>;
+            mv-deadzone = <100>;
+            scale-multiplier = <1>;
+            scale-divisor = <50>;
+            invert;
+            evt-type = <INPUT_EV_REL>;
+            input-code = <INPUT_REL_Y>;
+        };
+    };
+    // マウスポインタのアナログパッド
+    pointer_accel: pointer_accel {
+        compatible = "zmk,input-processor-acceleration";
+        #input-processor-cells = <0>;
+        input-type = <INPUT_EV_REL>; 
+        min-factor = <500>;
+        max-factor = <1500>;
+        speed-threshold = <2000>;
+        speed-max = <7000>;
+        acceleration-exponent = <1>;
+        track-remainders;
+    };
+
+    tpad0: tpad0 {
+        compatible = "zmk,input-listener";
+        status = "okay";
+        device = <&anin0>;
+        input-processors = <&pointer_accel>;
+    };
+};
 &default_transform {
     col-offset = <7>;
 };
@@ -34,51 +109,4 @@
 
 &adc {
     status = "okay";
-};
-
-/ {
-    anin0: analog_input_0 {
-        compatible = "zmk,analog-input";
-        sampling-hz = <100>;
-        x-ch {
-            io-channels = <&adc 5>;
-            mv-mid = <1650>;
-            mv-min-max = <1600>;
-            mv-deadzone = <100>;
-            scale-multiplier = <1>;
-            scale-divisor = <50>;
-            evt-type = <INPUT_EV_REL>;
-            input-code = <INPUT_REL_X>;
-        };
-        y-ch {
-            io-channels = <&adc 0>;
-            mv-mid = <1650>;
-            mv-min-max = <1600>;
-            mv-deadzone = <100>;
-            scale-multiplier = <1>;
-            scale-divisor = <50>;
-            invert;
-            evt-type = <INPUT_EV_REL>;
-            input-code = <INPUT_REL_Y>;
-        };
-    };
-
-    pointer_accel: pointer_accel {
-        compatible = "zmk,input-processor-acceleration";
-        #input-processor-cells = <0>;
-        input-type = <INPUT_EV_REL>; 
-        min-factor = <500>;
-        max-factor = <1500>;
-        speed-threshold = <2000>;
-        speed-max = <7000>;
-        acceleration-exponent = <1>;
-        track-remainders;
-    };
-
-    tpad0: tpad0 {
-        compatible = "zmk,input-listener";
-        status = "okay";
-        device = <&anin0>;
-        input-processors = <&pointer_accel>;
-    };
 };
