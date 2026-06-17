@@ -12,7 +12,6 @@
         compatible = "zmk,physical-layout";
         display-name = "Default Layout";
         transform = <&default_transform>;
-        kscan = <&main_kscan>;
     };
     default_transform: default_transform {
         compatible = "zmk,matrix-transform";
