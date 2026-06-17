@@ -18,7 +18,6 @@
             kscan = <&main_kscan_right>;
             col-offset = <7>; 
         };
-
         direct {
             kscan = <&kscan_direct>;
             col-offset = <14>; 
@@ -28,7 +27,6 @@
     kscan_direct: kscan_direct {
         compatible = "zmk,kscan-gpio-direct";
         input-gpios = <&gpio0 31 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
-        //input-gpios = <&gpio0 15 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>; 
     };
 
     // ⭕ 右手専用のマトリックスノードを新設（ラベル名を main_kscan_right に変更）
