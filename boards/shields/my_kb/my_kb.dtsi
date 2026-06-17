@@ -29,8 +29,8 @@
     };
     // メインマトリックスのベース定義（ピンは書かずに空宣言）
     main_kscan: kscan_mat {
-        compatible = "zmk,kscan-gpio-matrix";
-        diode-direction = "col2row";
+        // compatible = "zmk,kscan-gpio-matrix";
+        // diode-direction = "col2row";
     };
 };
 
