@@ -1,6 +1,6 @@
 #include "my_kb.dtsi"
 #include <dt-bindings/zmk/pointing.h>
-#include <behaviors/input_gestures_accel.dtsi>
+//#include <behaviors/input_gestures_accel.dtsi>
 
 / {
     // 右手（Master）起動時は、単体のkscanではなく複合kscan（right_composite）を使用する
