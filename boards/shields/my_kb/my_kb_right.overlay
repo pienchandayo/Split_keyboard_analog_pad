@@ -27,7 +27,7 @@
 
     kscan_direct: kscan_direct {
         compatible = "zmk,kscan-gpio-direct";
-        input-gpios = <&gpio0 15 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>; 
+        input-gpios = <&gpio0 31 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>; 
     };
 
     // ⭕ 右手専用のマトリックスノードを新設（ラベル名を main_kscan_right に変更）
@@ -55,9 +55,6 @@
     };
 
     // 右手直結のJoy-Con用ダイレクトキースキャン定義
-    kscan_direct: kscan_direct {
-        compatible = "zmk,kscan-gpio-direct";
-    };
     anin0: analog_input_0 {
         compatible = "zmk,analog-input";
         sampling-hz = <100>;
@@ -106,9 +103,6 @@
 
 
 /* 右手のアナログパッド用クリックピンをここで参照定義 */
-&kscan_direct {
-    input-gpios = <&gpio0 31 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
-};
 
 &adc {
     status = "okay";
