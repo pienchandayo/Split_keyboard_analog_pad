@@ -13,7 +13,7 @@
         display-name = "Default Layout";
         transform = <&default_transform>;
         kscan = <&main_kscan>;
-
+    };
     default_transform: default_transform {
         compatible = "zmk,matrix-transform";
         columns = <15>; // 左7列 + 右7列 + JoyCon1 = 計15列
