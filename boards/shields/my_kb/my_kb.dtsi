@@ -27,10 +27,10 @@
             RC(4,0) RC(4,1)          RC(4,3) RC(4,4) RC(4,5) RC(4,6)                       RC(4,7)          RC(4,9) RC(4,10)           RC(4,12) RC(4,13) 
         >;
     };
+    // メインマトリックスのベース定義（ピンは書かずに空宣言）
+    main_kscan: kscan_mat {
+        compatible = "zmk,kscan-gpio-matrix";
+        diode-direction = "col2row";
+};
 };
 
-// メインマトリックスのベース定義（ピンは書かずに空宣言）
-main_kscan: kscan_mat {
-    compatible = "zmk,kscan-gpio-matrix";
-    diode-direction = "col2row";
-};
