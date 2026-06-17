@@ -1,19 +1,12 @@
-#include "my_kb.dtsi"
-// #include <behaviors/input_gestures_accel.dtsi>
-// #include <zephyr/dt-bindings/input/input-event-codes.h>
-
 / {
     chosen {
-        // ⭕ 共通の器ではなく、新設した左手専用ノードを指定します
         zmk,kscan = &main_kscan_left;
     };
 
-    // ⭕ 左手専用のマトリックスノードを新設（固有のラベル名に変更）
     main_kscan_left: kscan_mat_left {
         compatible = "zmk,kscan-gpio-matrix";
         diode-direction = "col2row";
-        
-        /* CL0 から CL6 までの 7本 */
+
         col-gpios
             = <&gpio0 24 GPIO_ACTIVE_HIGH>
             , <&gpio1  0 GPIO_ACTIVE_HIGH>
@@ -24,7 +17,6 @@
             , <&gpio0  9 GPIO_ACTIVE_HIGH>
             ;
 
-        /* RL0 から RL4 までの 5本 */
         row-gpios
             = <&gpio0  6 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
             , <&gpio0  8 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
@@ -33,4 +25,9 @@
             , <&gpio0 22 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
             ;
     };
+};
+
+/* ⚠️例の P1.00 (COL1) の横取りを防ぐおまじない */
+&adc {
+    status = "disabled";
 };
