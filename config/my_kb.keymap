@@ -22,7 +22,7 @@
 	keymap {
 		compatible = "zmk,keymap";
 		
-		default_layer {
+
 	default_layer {
             // ⭕ 上記の default_transform のマスの数と位置に「1対1」で完全に一致させました！
             bindings = <
@@ -34,6 +34,8 @@
             &kp LEFT_CONTROL &kp LEFT_ALT           &kp TAB   &kp SPACE &kp A     &kp LEFT_SHIFT   &mkp LCLK           &kp ENTER &kp BACKSPACE       &kp F7    &kp F10
             >;
         };		// 7列(左) + 7列(右) = 14列 × 5行 = 全70キー分, 左アナログパッド,右アナログパッド
+
+		//default_layer {
 			// bindings = <
 			// &kp ESC          	&kp N1                  &kp N2                  &kp N3                  &kp N4          &kp N5                                                  &kp N6      &kp N7          &kp N8          &kp N9              &kp N0          &kp BSPC            &kp A
 			// &kp GRAVE           &kp Q                   &kp W                   &kp E                   &kp R           &kp T                                                   &kp Y       &kp U           &kp I           &kp O               &kp P           &kp BACKSLASH
@@ -41,7 +43,7 @@
 			// &kp LEFT_SHIFT      &kp Z                   &kp X                   &kp C                   &kp V           &kp B           &kp MINUS           &kp PLUS            &kp N       &kp M           &kp COMMA       &kp DOT             &kp SLASH       &kp DELETE
 			// &kp LEFT_CONTROL    &kp LEFT_ALT                                    &kp TAB            		&kp SPACE       &kp A           &kp LEFT_SHIFT      &mkp LCLK           			&kp ENTER       &kp BACKSPACE                       &kp F7          &kp F10
 			// >;
-		};
+		//};
 		// layer_1 {
 		// 	// 7列(左) + 7列(右) = 14列 × 5行 = 全70キー分
 		// 	bindings = <
