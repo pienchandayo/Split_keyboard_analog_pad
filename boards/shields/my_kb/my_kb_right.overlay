@@ -11,13 +11,15 @@
     right_composite: kscan_composite {
         compatible = "zmk,kscan-composite";
         rows = <5>;
-        columns = <15>; 
+        columns = <15>; // ⚠️重要：キーマップの「最大列インデックス」に合わせるため15にします
 
-        // ⭕ 共用の &main_kscan ではなく、右手専用の &main_kscan_right を指定する！
+        /* 自分のマトリックス（7列）を、dtsiのトランスフォーム上の位置「7列目〜」にマッピング */
         matrix {
             kscan = <&main_kscan_right>;
             col-offset = <7>; 
         };
+
+        /* 自分のDirectピン（1列）を、dtsiのトランスフォーム上の位置「14列目」にマッピング */
         direct {
             kscan = <&kscan_direct>;
             col-offset = <14>; 
@@ -26,30 +28,29 @@
 
     kscan_direct: kscan_direct {
         compatible = "zmk,kscan-gpio-direct";
-        input-gpios = <&gpio0 31 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
+        input-gpios = <&gpio0 31 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>; 
     };
 
-    // ⭕ 右手専用のマトリックスノードを新設（ラベル名を main_kscan_right に変更）
     main_kscan_right: kscan_mat_right {
         compatible = "zmk,kscan-gpio-matrix";
         diode-direction = "col2row";
 
         col-gpios
-            = <&gpio0 24 GPIO_ACTIVE_HIGH> /* これが内部列7（Yの列）として独立して正しく認識されます！ */
-            , <&gpio1  0 GPIO_ACTIVE_HIGH> 
-            , <&gpio0 11 GPIO_ACTIVE_HIGH> 
-            , <&gpio1  4 GPIO_ACTIVE_HIGH> 
-            , <&gpio1  6 GPIO_ACTIVE_HIGH> 
-            , <&gpio0 10 GPIO_ACTIVE_HIGH> 
-            , <&gpio0  9 GPIO_ACTIVE_HIGH> 
+            = <&gpio0 24 GPIO_ACTIVE_HIGH>
+            , <&gpio1  0 GPIO_ACTIVE_HIGH>
+            , <&gpio0 11 GPIO_ACTIVE_HIGH>
+            , <&gpio1  4 GPIO_ACTIVE_HIGH>
+            , <&gpio1  6 GPIO_ACTIVE_HIGH>
+            , <&gpio0 10 GPIO_ACTIVE_HIGH>
+            , <&gpio0  9 GPIO_ACTIVE_HIGH>
             ;
 
         row-gpios
-            = <&gpio0  6 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)> 
-            , <&gpio0  8 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)> 
-            , <&gpio0 17 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)> 
-            , <&gpio0 20 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)> 
-            , <&gpio0 22 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)> 
+            = <&gpio0  6 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
+            , <&gpio0  8 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
+            , <&gpio0 17 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
+            , <&gpio0 20 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
+            , <&gpio0 22 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
             ;
     };
 
