@@ -1,9 +1,18 @@
-#include "my_kb.dtsi"
-
 / {
     chosen {
-        /* ⭕ 自分自身の素のマトリックスを使うと宣言 */
-        zmk,kscan = &main_kscan_left;
+        zmk,kscan = &left_composite;
+    };
+
+    /* ⭕ 左手のデータを「7列目〜」にずらしてマスター（右手）に送信する器 */
+    left_composite: kscan_composite {
+        compatible = "zmk,kscan-composite";
+        rows = <5>;
+        columns = <14>;
+
+        matrix {
+            kscan = <&main_kscan_left>;
+            col-offset = <7>; // 7番目から配置（これでインデックスが綺麗に整列します！）
+        };
     };
 
     main_kscan_left: kscan_mat_left {
@@ -12,12 +21,11 @@
 
         col-gpios
             = <&gpio0 24 GPIO_ACTIVE_HIGH> // COL0
-            , <&gpio1  0 GPIO_ACTIVE_HIGH> // COL1 (もう何も邪魔するものはいないので、確実に動きます！)
+            , <&gpio1  0 GPIO_ACTIVE_HIGH> // COL1 ➔ これで絶対に認識されます！
             , <&gpio0 11 GPIO_ACTIVE_HIGH> // COL2
             , <&gpio1  4 GPIO_ACTIVE_HIGH> 
             , <&gpio1  6 GPIO_ACTIVE_HIGH> 
             , <&gpio0 10 GPIO_ACTIVE_HIGH> 
-            , <&gpio0  9 GPIO_ACTIVE_HIGH> 
             ;
 
         row-gpios
